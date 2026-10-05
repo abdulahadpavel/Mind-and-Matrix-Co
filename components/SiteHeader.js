@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const NAV = [
-  { href: "/", label: "White Label" },
+  { href: "/white-label", label: "White Label" },
   { href: "/dental", label: "Dental" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },

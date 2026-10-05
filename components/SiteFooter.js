@@ -25,7 +25,7 @@ export default function SiteFooter() {
             <h4>Company</h4>
             <ul>
               <li>
-                <Link href="/">White Label</Link>
+                <Link href="/white-label">White Label</Link>
               </li>
               <li>
                 <Link href="/about">About Us</Link>
