@@ -211,6 +211,11 @@ ul { margin: 0; padding: 0; }
 .bars i { flex: 1; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--blue), #7FA4FF); }
 .your-logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; color: var(--ink); font-size: 14px; }
 .your-logo i { width: 22px; height: 22px; border-radius: 6px; border: 2px dashed var(--muted); }
+.agency-swap { display: inline-grid; vertical-align: bottom; }
+.agency-swap > * { grid-area: 1 / 1; animation: agency-swap 8s infinite; }
+.agency-swap > :nth-child(2) { animation-delay: -4s; }
+@keyframes agency-swap { 0%, 42% { opacity: 1; transform: none; } 50%, 92% { opacity: 0; transform: translateY(4px); } 100% { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .agency-swap > * { animation: none; } .agency-swap > :nth-child(2) { opacity: 0; } }
 
 /* ---------- Industries ---------- */
 .industry { display: flex; flex-direction: column; justify-content: space-between; min-height: 190px; }

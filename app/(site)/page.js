@@ -122,15 +122,47 @@ export default function HomePage() {
           </div>
           <div className="mock-report reveal" aria-hidden="true">
             <div className="bar">
-              <span className="your-logo">
-                <i /> YOUR AGENCY LOGO
+              <span className="agency-swap">
+                <span className="your-logo">
+                  <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="dutech-grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stopColor="#F97316" />
+                        <stop offset="1" stopColor="#E11D48" />
+                      </linearGradient>
+                    </defs>
+                    <rect width="32" height="32" rx="8" fill="url(#dutech-grad)" />
+                    <path d="M9 9h5.5a7 7 0 0 1 0 14H9z" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinejoin="round" />
+                    <circle cx="22.5" cy="16" r="2.4" fill="#fff" />
+                  </svg>
+                  Dutech Digital
+                </span>
+                <span className="your-logo">
+                  <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="ecomtrend-grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stopColor="#10B981" />
+                        <stop offset="1" stopColor="#0E7490" />
+                      </linearGradient>
+                    </defs>
+                    <rect width="32" height="32" rx="8" fill="url(#ecomtrend-grad)" />
+                    <path d="M8 21l5.5-5.5 4 4L24 13" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M19.5 13H24v4.5" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  Ecomtrend
+                </span>
               </span>{" "}
               <span className="tag">White label</span>
             </div>
             <div className="body">
               <b style={{ color: "var(--ink)" }}>Monthly Performance Report — Client Name</b>
               <p className="muted" style={{ fontSize: "13px", color: "var(--muted)", margin: "2px 0 16px" }}>
-                Prepared by Your Agency · Google Ads + Meta Ads
+                Prepared by{" "}
+                <span className="agency-swap">
+                  <span>Dutech Digital</span>
+                  <span>Ecomtrend</span>
+                </span>{" "}
+                · Google Ads + Meta Ads
               </p>
               <div className="kpis">
                 <div className="kpi">
