@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createSubmission, FIELDS } from "@/lib/submissions";
+import { getSetting } from "@/lib/settings";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -36,7 +37,6 @@ export async function POST(request) {
         { status: 429 }
       );
     }
-    return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Failed to save submission", err);
     return NextResponse.json(
@@ -44,4 +44,8 @@ export async function POST(request) {
       { status: 500 }
     );
   }
+
+  // The lead is saved; the booking link is optional extra, so a failure here must not fail the request.
+  const bookingUrl = await getSetting("booking_url").catch(() => "");
+  return NextResponse.json({ success: true, bookingUrl });
 }

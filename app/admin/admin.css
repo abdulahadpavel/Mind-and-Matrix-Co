@@ -309,3 +309,10 @@
 @media (prefers-reduced-motion: reduce) {
   .adm * { transition: none !important; }
 }
+
+/* ---------- Settings ---------- */
+.adm-settings { max-width: 900px; }
+.adm-settings > p { margin: 0 0 16px; }
+.adm-preview { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.adm-preview h3 { font-size: 15px; margin: 0; }
+.adm-preview iframe { width: 100%; height: 640px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }

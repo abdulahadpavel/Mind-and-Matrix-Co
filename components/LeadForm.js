@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import BookingDialog from "./BookingDialog";
 
 export const SERVICES = [
   "Google Ads",
@@ -49,6 +50,9 @@ export default function LeadForm({
   const attribution = useRef({});
   const [status, setStatus] = useState({ type: "", text: "" });
   const [sending, setSending] = useState(false);
+  // After a successful submit: { url, name } when a booking calendar is configured.
+  const [booking, setBooking] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const full = variant === "full";
 
   useEffect(() => {
@@ -96,7 +100,14 @@ export default function LeadForm({
       window.dataLayer.push({ event: "generate_lead", form_source: source, partner_type: payload.partner_type || "" });
 
       form.reset();
-      setStatus({ type: "ok", text: "Thank you! We received your details and will reply within 1 business day." });
+      if (json.bookingUrl) {
+        setStatus({ type: "", text: "" });
+        setBooking({ url: json.bookingUrl, name: name.split(/\s+/)[0] });
+        setDialogOpen(true);
+        window.dataLayer.push({ event: "booking_calendar_open", form_source: source });
+      } else {
+        setStatus({ type: "ok", text: "Thank you! We received your details and will reply within 1 business day." });
+      }
     } catch (err) {
       setStatus({
         type: "err",
@@ -108,6 +119,31 @@ export default function LeadForm({
     } finally {
       setSending(false);
     }
+  }
+
+  const dialog = dialogOpen && booking && (
+    <BookingDialog url={booking.url} name={booking.name} onClose={() => setDialogOpen(false)} />
+  );
+
+  if (booking) {
+    return (
+      <div className="form-card" id={id}>
+        <div className="form-done" role="status">
+          <span className="form-done-icon" aria-hidden="true">✓</span>
+          <h3>Thanks{booking.name ? `, ${booking.name}` : ""} — we got your details</h3>
+          <p className="form-sub">
+            We’ll reply within 1 business day. Want to skip the back-and-forth? Pick a time for a free call now.
+          </p>
+          <button type="button" className="btn btn-primary btn-block" onClick={() => setDialogOpen(true)}>
+            Pick a time for your call
+          </button>
+          <button type="button" className="form-done-again" onClick={() => setBooking(null)}>
+            Send another request
+          </button>
+        </div>
+        {dialog}
+      </div>
+    );
   }
 
   return (

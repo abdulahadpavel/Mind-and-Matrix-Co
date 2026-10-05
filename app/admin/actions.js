@@ -13,6 +13,7 @@ import {
   setStatus,
 } from "@/lib/submissions";
 import { changeOwnPassword, createUser, deleteUser, setPassword, updateProfile } from "@/lib/users";
+import { resolveBookingUrl, setSetting } from "@/lib/settings";
 
 const ids = (formData) => formData.getAll("ids").map(String).filter(isUuid);
 
@@ -127,4 +128,17 @@ export async function endOtherSessionsAction() {
   const admin = await requireAdmin();
   await endSessions(admin.id, { keepCurrent: true });
   refresh();
+}
+
+// ---------- Settings (owner only) ----------
+
+export async function saveBookingAction(_prev, formData) {
+  const admin = await requireOwner();
+  const link = String(formData.get("booking_link") || "").trim().slice(0, 2000);
+  const result = await resolveBookingUrl(link);
+  if (result.error) return { error: result.error };
+  await setSetting("booking_link", link, admin);
+  await setSetting("booking_url", result.url, admin);
+  refresh();
+  return { ok: true, at: Date.now(), message: result.url ? "Saved. The calendar now opens after every form submission." : "Saved. The calendar is turned off." };
 }
