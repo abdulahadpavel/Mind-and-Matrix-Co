@@ -1,0 +1,22 @@
+{
+  "name": "mind-and-matrix",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "convert": "node scripts/convert-html.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.0",
+    "next": "^16.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "node-html-parser": "^9.0.4",
+    "prettier": "^3.9.9"
+  }
+}
