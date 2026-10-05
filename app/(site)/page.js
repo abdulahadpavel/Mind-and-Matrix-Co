@@ -954,7 +954,7 @@ export default function HomePage() {
                     <path d="M9 8V6a3 3 0 016 0v2" />
                   </svg>
                 </div>
-                <h3>Clothing &amp; E-commerce</h3>
+                <h3>D2C Ecommerce Brand</h3>
                 <p>Shopify and WooCommerce stores — catalog ads, Advantage+ Shopping and retargeting.</p>
               </div>
             </div>
