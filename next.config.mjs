@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Don't generate AGENTS.md / CLAUDE.md on `next dev`.
+  agentRules: false,
   // Keep the old static-site URLs working.
   async redirects() {
     return [

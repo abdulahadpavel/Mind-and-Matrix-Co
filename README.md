@@ -66,5 +66,3 @@ vercel deploy --prod
 ```
 
 The build runs the database migrations first, then builds the site.
-
-`scripts/convert-html.mjs` is the one-off script that generated the page JSX from the original HTML. Running it again (`npm run convert`) overwrites the page files.
