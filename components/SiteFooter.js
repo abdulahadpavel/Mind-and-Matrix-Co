@@ -60,7 +60,7 @@ export default function SiteFooter() {
                 <Link href="/#industries">HVAC</Link>
               </li>
               <li>
-                <Link href="/#industries">Clothing &amp; E-commerce</Link>
+                <Link href="/#industries">D2C Ecommerce Brand</Link>
               </li>
             </ul>
           </div>
