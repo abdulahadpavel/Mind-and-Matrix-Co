@@ -1,0 +1,69 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { logoutAction } from "../actions";
+
+const ICONS = {
+  dashboard: "M3 13h8V3H3zM13 21h8V11h-8zM3 21h8v-6H3zM13 3v6h8V3z",
+  inbox: "M22 12h-6l-2 3h-4l-2-3H2M5.5 5.1L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.5-6.9A2 2 0 0016.7 4H7.3a2 2 0 00-1.8 1.1z",
+  trash: "M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6",
+  users: "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8",
+  account: "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z",
+};
+
+function Icon({ name }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={ICONS[name]} />
+    </svg>
+  );
+}
+
+export default function AdminNav({ admin, newCount }) {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  const items = [
+    { href: "/admin", label: "Dashboard", icon: "dashboard", exact: true },
+    { href: "/admin/submissions", label: "Submissions", icon: "inbox", badge: newCount },
+    { href: "/admin/trash", label: "Trash", icon: "trash" },
+    ...(admin.role === "owner" ? [{ href: "/admin/users", label: "Admin users", icon: "users" }] : []),
+    { href: "/admin/account", label: "My account", icon: "account" },
+  ];
+  const isActive = (i) => (i.exact ? pathname === i.href : pathname === i.href || pathname.startsWith(i.href + "/"));
+
+  return (
+    <aside className={open ? "adm-side is-open" : "adm-side"}>
+      <div className="adm-side-top">
+        <Link href="/admin" className="adm-side-brand">
+          <img src="/img/logo-horizontal-white.svg" alt="Mind and Matrix Co." width="160" height="26" />
+        </Link>
+        <button className="adm-side-toggle" aria-expanded={open} aria-controls="adm-nav" onClick={() => setOpen((v) => !v)}>
+          <span className="screen-reader-text">Menu</span>
+          <span /><span /><span />
+        </button>
+      </div>
+      <nav id="adm-nav" className="adm-side-nav" onClick={(e) => e.target.closest("a") && setOpen(false)}>
+        {items.map((i) => (
+          <Link key={i.href} href={i.href} className={isActive(i) ? "is-active" : ""} aria-current={isActive(i) ? "page" : undefined}>
+            <Icon name={i.icon} />
+            <span>{i.label}</span>
+            {i.badge > 0 && <b className="adm-badge">{i.badge}</b>}
+          </Link>
+        ))}
+        <a href="/" target="_blank" rel="noopener" className="adm-side-site">View website ↗</a>
+      </nav>
+      <div className="adm-side-user">
+        <div>
+          <b>{admin.name || admin.email}</b>
+          <small>{admin.role === "owner" ? "Owner" : "Admin"}</small>
+        </div>
+        <form action={logoutAction}>
+          <button className="adm-side-logout" type="submit">Log out</button>
+        </form>
+      </div>
+    </aside>
+  );
+}

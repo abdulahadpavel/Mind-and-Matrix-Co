@@ -1,45 +1,27 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useActionState } from "react";
+import { loginAction } from "../actions";
+import SubmitButton from "../_components/SubmitButton";
 
-export default function LoginForm() {
-  const router = useRouter();
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
-
-  async function onSubmit(e) {
-    e.preventDefault();
-    setBusy(true);
-    setError("");
-    const password = new FormData(e.currentTarget).get("password");
-    const res = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-    if (res.ok) {
-      router.replace("/admin");
-      router.refresh();
-      return;
-    }
-    const json = await res.json().catch(() => ({}));
-    setError(json.error || "Login failed.");
-    setBusy(false);
-  }
+export default function LoginForm({ next }) {
+  const [state, action] = useActionState(loginAction, null);
 
   return (
     <main className="adm-login">
-      <form className="adm-login-card" onSubmit={onSubmit}>
+      <form className="adm-login-card" action={action}>
         <img src="/img/logo-horizontal.svg" alt="Mind and Matrix Co." width="200" height="32" />
-        <h1>Admin panel</h1>
-        <p>Sign in to view form submissions.</p>
+        <h1>Admin sign in</h1>
+        <p>Manage the leads sent from the website.</p>
+        <input type="hidden" name="next" value={next} />
+        <label htmlFor="email">Email</label>
+        <input id="email" name="email" type="email" autoComplete="username" required autoFocus defaultValue={state?.email || ""} />
         <label htmlFor="password">Password</label>
-        <input id="password" name="password" type="password" autoComplete="current-password" required autoFocus />
-        {error && <div className="adm-error">{error}</div>}
-        <button className="adm-btn adm-btn-primary" disabled={busy}>
-          {busy ? "Signing in…" : "Sign in"}
-        </button>
+        <input id="password" name="password" type="password" autoComplete="current-password" required />
+        {state?.error && <p className="adm-alert adm-alert-err" role="alert">{state.error}</p>}
+        <SubmitButton className="adm-btn adm-btn-primary adm-btn-lg" pendingText="Signing in…">
+          Sign in
+        </SubmitButton>
       </form>
     </main>
   );

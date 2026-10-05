@@ -1,18 +1,7 @@
 import { NextResponse } from "next/server";
-import { addSubmission, FIELDS } from "@/lib/submissions";
+import { createSubmission, FIELDS } from "@/lib/submissions";
 
-// Basic per-IP rate limit: 8 submissions per 10 minutes.
-const hits = new Map();
-const WINDOW = 10 * 60 * 1000;
-const LIMIT = 8;
-
-function rateLimited(ip) {
-  const now = Date.now();
-  const recent = (hits.get(ip) || []).filter((t) => now - t < WINDOW);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > LIMIT;
-}
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request) {
   let body;
@@ -25,27 +14,34 @@ export async function POST(request) {
   // Honeypot filled → pretend success so bots move on.
   if (body.website_hp) return NextResponse.json({ success: true });
 
-  const ip = (request.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "local";
-  if (rateLimited(ip)) {
-    return NextResponse.json(
-      { success: false, error: "Too many submissions. Please try again in a few minutes." },
-      { status: 429 }
-    );
-  }
-
   const fields = {};
   for (const [key, max] of Object.entries(FIELDS)) {
     const v = body[key];
     fields[key] = typeof v === "string" ? v.trim().slice(0, max) : "";
   }
-
-  if (!fields.name || !fields.company || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
+  if (!fields.name || !fields.company || !EMAIL_RE.test(fields.email)) {
     return NextResponse.json(
       { success: false, error: "Please add your name, a valid email and your company name." },
       { status: 400 }
     );
   }
 
-  await addSubmission(fields, { ip, userAgent: request.headers.get("user-agent") || "" });
-  return NextResponse.json({ success: true });
+  const ip = (request.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
+  const userAgent = (request.headers.get("user-agent") || "").slice(0, 300);
+  try {
+    const result = await createSubmission(fields, { ip, userAgent });
+    if (result.rateLimited) {
+      return NextResponse.json(
+        { success: false, error: "Too many submissions. Please try again in a few minutes." },
+        { status: 429 }
+      );
+    }
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("Failed to save submission", err);
+    return NextResponse.json(
+      { success: false, error: "Something went wrong. Please try again or email us directly." },
+      { status: 500 }
+    );
+  }
 }
