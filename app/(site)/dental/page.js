@@ -33,58 +33,13 @@ export default function DentalPage() {
               <li>Call tracking, booking tracking &amp; HIPAA-aware lead handling</li>
             </ul>
           </div>
-          <div className="mock reveal" aria-hidden="true">
-            <div className="reach-title">
-              <b>New-patient pipeline</b>
-              <span className="muted" style={{ fontSize: "13px" }}>
-                Last 30 days
-              </span>
-            </div>
-            <div className="kpis">
-              <div className="kpi">
-                <small>New leads</small>
-                <b>162</b>
-              </div>
-              <div className="kpi">
-                <small>Booked</small>
-                <b>97</b>
-              </div>
-              <div className="kpi">
-                <small>Cost / lead</small>
-                <b>$38</b>
-              </div>
-            </div>
-            <div className="reach">
-              <div className="reach-row">
-                <span>Google Ads</span>
-                <div className="track">
-                  <div className="fill" style={{ width: "82%" }} />
-                </div>
-                <b>64</b>
-              </div>
-              <div className="reach-row">
-                <span>Meta Ads</span>
-                <div className="track">
-                  <div className="fill" style={{ width: "66%" }} />
-                </div>
-                <b>51</b>
-              </div>
-              <div className="reach-row">
-                <span>Google Business</span>
-                <div className="track">
-                  <div className="fill" style={{ width: "44%" }} />
-                </div>
-                <b>33</b>
-              </div>
-              <div className="reach-row">
-                <span>YouTube</span>
-                <div className="track">
-                  <div className="fill" style={{ width: "18%" }} />
-                </div>
-                <b>14</b>
-              </div>
-            </div>
-          </div>
+          <LeadForm
+            id="dental-form"
+            title="Request your free dental audit"
+            subtitle="Agency or practice — we reply within 1 business day, and you can book a call right away."
+            source="dental-page"
+            submitLabel="Get my free audit"
+          />
         </div>
       </section>
       <section className="section" id="channels">
@@ -225,28 +180,25 @@ export default function DentalPage() {
           </div>
         </div>
       </section>
-      <section className="section section-dark" id="dental-form">
-        <div className="wrap split">
-          <div className="reveal">
-            <span className="eyebrow">Dental agencies &amp; practices</span>
-            <h2>Get a free dental ads audit</h2>
-            <p>
-              Share one dental account (yours or a client’s). Within 48 hours we send a clear audit and growth
-              plan — white-labeled if you are an agency.
-            </p>
-            <ul className="checks" style={{ marginTop: "22px" }}>
-              <li style={{ color: "#fff" }}>Wasted-spend &amp; keyword review</li>
-              <li style={{ color: "#fff" }}>Tracking &amp; conversion health check</li>
-              <li style={{ color: "#fff" }}>90-day new-patient growth plan</li>
-            </ul>
+      <section className="section">
+        <div className="wrap">
+          <div className="cta-band reveal">
+            <div>
+              <h2>Get a free dental ads audit</h2>
+              <p>
+                Share one dental account (yours or a client’s). Within 48 hours we send a clear audit and growth
+                plan, white-labeled if you are an agency.
+              </p>
+              <ul className="checks" style={{ marginTop: "18px" }}>
+                <li style={{ color: "#fff" }}>Wasted-spend &amp; keyword review</li>
+                <li style={{ color: "#fff" }}>Tracking &amp; conversion health check</li>
+                <li style={{ color: "#fff" }}>90-day new-patient growth plan</li>
+              </ul>
+            </div>
+            <a className="btn btn-light" href="#dental-form">
+              Request my free audit
+            </a>
           </div>
-          <LeadForm
-            id="partner-form"
-            title="Request your dental audit"
-            subtitle="Agency or practice — we reply within 1 business day."
-            source="dental-page"
-            submitLabel="Get my free proposal"
-          />
         </div>
       </section>
     </main>

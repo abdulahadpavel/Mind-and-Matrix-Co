@@ -451,3 +451,6 @@ html:has(.booking-dialog[open]) { overflow: hidden; }
 .booking-dialog .booking-head h2 { color: var(--ink); }
 .booking-dialog .booking-head p, .booking-dialog .booking-foot { color: var(--muted); }
 .form-card .form-done h3 { color: var(--ink); }
+
+/* Keep in-page jumps to a form clear of the sticky header */
+.form-card { scroll-margin-top: 96px; }
