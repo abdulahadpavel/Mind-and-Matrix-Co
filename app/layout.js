@@ -19,7 +19,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={jakarta.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={jakarta.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        {/* Lets CSS hide scroll-reveal content only when JavaScript is running */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="page">{children}</body>
     </html>
   );

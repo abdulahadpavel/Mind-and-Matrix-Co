@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NAV = [
   { href: "/white-label", label: "White Label" },
@@ -12,6 +12,15 @@ const NAV = [
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Frosted, compact header once the page is scrolled.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close the mobile menu whenever a link inside it is followed.
   function onNavClick(e) {
@@ -19,7 +28,7 @@ export default function SiteHeader() {
   }
 
   return (
-    <header className="site-header">
+    <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <div className="wrap header-inner">
         <Link className="brand" href="/" rel="home">
           <img

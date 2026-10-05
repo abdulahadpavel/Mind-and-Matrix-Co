@@ -9,6 +9,7 @@ export default function SiteLayout({ children }) {
       <a className="skip-link screen-reader-text" href="#main">
         Skip to content
       </a>
+      <div className="scroll-progress" aria-hidden="true" />
       <SiteHeader />
       {children}
       <SiteFooter />
