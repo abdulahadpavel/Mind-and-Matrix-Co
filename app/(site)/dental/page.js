@@ -1,5 +1,6 @@
 import LeadForm from "@/components/LeadForm";
 import DentalTabs from "@/components/DentalTabs";
+import HeroBackdrop from "@/components/HeroBackdrop";
 
 export const metadata = { title: "Dental Marketing" };
 
@@ -7,6 +8,7 @@ export default function DentalPage() {
   return (
     <main id="main">
       <section className="hero page-hero">
+        <HeroBackdrop />
         <div className="wrap hero-grid">
           <div>
             <span className="hero-badge">

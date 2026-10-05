@@ -1,4 +1,5 @@
 import LeadForm from "@/components/LeadForm";
+import HeroBackdrop from "@/components/HeroBackdrop";
 
 export const metadata = { title: "Contact" };
 
@@ -6,6 +7,7 @@ export default function ContactPage() {
   return (
     <main id="main">
       <section className="hero page-hero">
+        <HeroBackdrop />
         <div className="wrap">
           <span className="hero-badge">
             <i /> Contact us

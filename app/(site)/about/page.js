@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeroBackdrop from "@/components/HeroBackdrop";
 
 export const metadata = { title: "About Us" };
 
@@ -6,6 +7,7 @@ export default function AboutPage() {
   return (
     <main id="main">
       <section className="hero page-hero">
+        <HeroBackdrop />
         <div className="wrap">
           <span className="hero-badge">
             <i /> About us

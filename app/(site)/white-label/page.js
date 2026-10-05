@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
+import HeroBackdrop from "@/components/HeroBackdrop";
 
 export const metadata = {
   title: "White Label Paid Media for Agencies",
@@ -50,6 +51,7 @@ export default function WhiteLabelPage() {
   return (
     <main id="main">
       <section className="hero">
+        <HeroBackdrop />
         <div className="wrap hero-grid">
           <div>
             <span className="hero-badge">
