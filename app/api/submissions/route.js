@@ -29,8 +29,10 @@ export async function POST(request) {
 
   const ip = (request.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
   const userAgent = (request.headers.get("user-agent") || "").slice(0, 300);
+  let leadId = "";
   try {
     const result = await createSubmission(fields, { ip, userAgent });
+    leadId = result.id || "";
     if (result.rateLimited) {
       return NextResponse.json(
         { success: false, error: "Too many submissions. Please try again in a few minutes." },
@@ -47,5 +49,5 @@ export async function POST(request) {
 
   // The lead is saved; the booking link is optional extra, so a failure here must not fail the request.
   const bookingUrl = await getSetting("booking_url").catch(() => "");
-  return NextResponse.json({ success: true, bookingUrl });
+  return NextResponse.json({ success: true, bookingUrl, leadId });
 }

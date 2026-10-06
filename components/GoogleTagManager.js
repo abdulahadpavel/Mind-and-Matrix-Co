@@ -4,7 +4,7 @@ import Script from "next/script";
 export const GTM_ID = "GTM-5G9HZ3R4";
 
 // The main GTM script. Next.js loads it on every page; the lead form already pushes
-// a "generate_lead" event to the dataLayer that GTM tags can listen for.
+// a "lead-submit" event to the dataLayer that GTM tags can listen for.
 export function GoogleTagManagerScript() {
   return (
     <Script id="google-tag-manager" strategy="afterInteractive">

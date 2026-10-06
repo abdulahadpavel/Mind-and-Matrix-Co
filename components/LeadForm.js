@@ -95,9 +95,23 @@ export default function LeadForm({
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.success) throw new Error(json.error || "save failed");
 
-      // GTM / GA4 friendly conversion event
+      // GTM conversion event: fires once the lead is saved, before the booking calendar opens.
+      // Trigger in GTM: Custom Event "lead-submit". lead_id is unique per lead (use it to de-duplicate,
+      // e.g. as the Meta event ID or GA4 transaction ID). user_data is for Google Ads enhanced conversions.
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "generate_lead", form_source: source, partner_type: payload.partner_type || "" });
+      window.dataLayer.push({
+        event: "lead-submit",
+        lead_id: json.leadId || "",
+        form_source: source,
+        partner_type: payload.partner_type || "",
+        ad_spend: payload.ad_spend || "",
+        services: payload.services || "",
+        page_path: window.location.pathname,
+        user_data: {
+          email: email.toLowerCase(),
+          ...(payload.phone ? { phone_number: payload.phone.replace(/[^\d+]/g, "") } : {}),
+        },
+      });
 
       form.reset();
       if (json.bookingUrl) {
