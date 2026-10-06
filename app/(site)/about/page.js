@@ -50,7 +50,7 @@ export default function AboutPage() {
                 />
                 <div>
                   <h3>Abdul Ahad Pavel</h3>
-                  <span className="founder-role">Co-Founder · Paid Media &amp; Tracking</span>
+                  <span className="founder-role">Co-Founder · AdTech, CRO &amp; Business System Engineer</span>
                 </div>
               </div>
               <p>

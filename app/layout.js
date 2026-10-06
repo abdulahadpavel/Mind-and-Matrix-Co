@@ -81,7 +81,7 @@ const ORGANIZATION = {
       address: { "@type": "PostalAddress", addressLocality: CITY, addressCountry: "BD" },
       areaServed: ["Bangladesh", "United States", "United Kingdom", "Canada", "Australia", "Worldwide"],
       founder: [
-        { "@type": "Person", name: "Abdul Ahad Pavel" },
+        { "@type": "Person", name: "Abdul Ahad Pavel", jobTitle: "Co-Founder · AdTech, CRO & Business System Engineer" },
         { "@type": "Person", name: "Partho Sharothi Paul" },
       ],
       knowsAbout: [
