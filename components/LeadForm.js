@@ -148,7 +148,7 @@ export default function LeadForm({
 
   return (
     <div className="form-card" id={id}>
-      <h3>{title}</h3>
+      <h2 className="form-title">{title}</h2>
       <p className="form-sub">{subtitle}</p>
 
       <form className="lead-form" noValidate onSubmit={onSubmit}>

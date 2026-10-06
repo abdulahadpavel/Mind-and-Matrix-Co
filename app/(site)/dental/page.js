@@ -2,7 +2,12 @@ import LeadForm from "@/components/LeadForm";
 import DentalTabs from "@/components/DentalTabs";
 import HeroBackdrop from "@/components/HeroBackdrop";
 
-export const metadata = { title: "Dental Marketing" };
+export const metadata = {
+  title: "Dental Marketing Agency — Google Ads & Facebook Ads for Dentists",
+  description:
+    "Dental marketing that brings new patients: Google Ads, Facebook & Instagram ads, Google Business Profile and YouTube for dental practices — delivered directly or white label for agencies.",
+  alternates: { canonical: "/dental" },
+};
 
 export default function DentalPage() {
   return (

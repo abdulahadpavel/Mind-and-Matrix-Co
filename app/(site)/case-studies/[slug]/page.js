@@ -5,6 +5,7 @@ import HeroBackdrop from "@/components/HeroBackdrop";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import Markdown from "@/components/Markdown";
 import { getPublishedBySlug, safeListPublished } from "@/lib/caseStudies";
+import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 // Published case studies are built ahead of time; new ones are built on first visit.
 // Saving in the admin clears these pages so changes show right away.
@@ -42,9 +43,38 @@ export default async function CaseStudyPage({ params }) {
   const more = await safeListPublished({ limit: 3, excludeSlug: cs.slug });
   const metrics = cs.metrics || [];
   const formId = "case-form";
+  const url = absoluteUrl(`/case-studies/${cs.slug}`);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${url}#article`,
+        headline: cs.title,
+        description: cs.seo_description || cs.summary,
+        url,
+        mainEntityOfPage: url,
+        ...(cs.cover_url ? { image: absoluteUrl(cs.cover_url) } : {}),
+        datePublished: new Date(cs.published_at || cs.created_at).toISOString(),
+        dateModified: new Date(cs.updated_at).toISOString(),
+        author: { "@id": `${SITE_URL}/#organization`, name: SITE_NAME },
+        publisher: { "@id": `${SITE_URL}/#organization`, name: SITE_NAME },
+        about: [cs.client, cs.industry, ...(cs.tags || [])].filter(Boolean),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+          { "@type": "ListItem", position: 2, name: "Case studies", item: absoluteUrl("/case-studies") },
+          { "@type": "ListItem", position: 3, name: cs.client || cs.title, item: url },
+        ],
+      },
+    ],
+  };
 
   return (
     <main id="main">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(structuredData)} />
       <section className="hero page-hero cs-hero">
         <HeroBackdrop />
         <div className="wrap hero-grid">

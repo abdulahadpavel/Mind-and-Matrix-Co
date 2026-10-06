@@ -1,7 +1,12 @@
 import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 
-export const metadata = { title: "Contact" };
+export const metadata = {
+  title: "Contact Us — Get a Free Proposal",
+  description:
+    "Contact Mind and Matrix Co. at admin@mindandmatrixco.com or on WhatsApp +8801737054053. Get a free proposal for Google Ads, Facebook ads, conversion tracking or white label services.",
+  alternates: { canonical: "/contact" },
+};
 
 export default function ContactPage() {
   return (
@@ -44,7 +49,7 @@ export default function ContactPage() {
                 </span>
                 <div>
                   <small>Email</small>
-                  <a href="mailto:hello@mindandmatrix.com">hello@mindandmatrix.com</a>
+                  <a href="mailto:admin@mindandmatrixco.com">admin@mindandmatrixco.com</a>
                 </div>
               </li>
               <li>

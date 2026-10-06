@@ -1,5 +1,17 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import {
+  ALT_NAMES,
+  CITY,
+  DEFAULT_DESCRIPTION,
+  EMAIL,
+  LOGO_PATH,
+  SITE_NAME,
+  SITE_URL,
+  WHATSAPP,
+  absoluteUrl,
+  jsonLdScript,
+} from "@/lib/site";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -8,19 +20,103 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-// Full site address, used for share images and canonical links.
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
-
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Mind and Matrix Co. | White Label Paid Media Agency",
+    default: "Mind and Matrix Co. | White Label Digital Advertising Agency",
     template: "%s | Mind and Matrix Co.",
   },
-  description:
-    "White-label Google Ads, Meta Ads, Google Business Profile and YouTube management for marketing agencies.",
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "Mind and Matrix",
+    "mindandmatrix",
+    "mindandmatrixco",
+    "white label agency",
+    "best white label agency",
+    "digital advertising agency",
+    "best digital marketing agency",
+    "Google Ads agency",
+    "Facebook ads agency",
+    "conversion tracking solutions",
+    "web analytics agency",
+    "advertising agency in Bangladesh",
+    "digital marketing agency in Bangladesh",
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_US",
+    url: "/",
+    title: "Mind and Matrix Co. | White Label Digital Advertising Agency",
+    description: DEFAULT_DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  // Paste the codes from Google Search Console / Bing Webmaster Tools into these Vercel env vars.
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+  },
+};
+
+// Tells Google and Bing who the business is (name, other spellings, contact, location, services).
+const ORGANIZATION = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      alternateName: ALT_NAMES,
+      url: SITE_URL,
+      logo: absoluteUrl(LOGO_PATH),
+      image: absoluteUrl("/opengraph-image"),
+      email: EMAIL,
+      telephone: WHATSAPP,
+      description: DEFAULT_DESCRIPTION,
+      address: { "@type": "PostalAddress", addressLocality: CITY, addressCountry: "BD" },
+      areaServed: ["Bangladesh", "United States", "United Kingdom", "Canada", "Australia", "Worldwide"],
+      founder: [
+        { "@type": "Person", name: "Abdul Ahad Pavel" },
+        { "@type": "Person", name: "Partho Sharothi Paul" },
+      ],
+      knowsAbout: [
+        "White label digital marketing",
+        "Google Ads management",
+        "Facebook and Instagram advertising",
+        "Meta Conversions API",
+        "Conversion tracking",
+        "Web analytics",
+        "Google Analytics 4",
+        "Google Tag Manager",
+        "Landing page optimization",
+        "Performance marketing",
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: EMAIL,
+          telephone: WHATSAPP,
+          areaServed: "Worldwide",
+          availableLanguage: ["English", "Bengali"],
+        },
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      alternateName: ALT_NAMES,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      inLanguage: "en",
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {
@@ -29,6 +125,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Lets CSS hide scroll-reveal content only when JavaScript is running */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(ORGANIZATION)} />
       </head>
       <body className="page">{children}</body>
     </html>

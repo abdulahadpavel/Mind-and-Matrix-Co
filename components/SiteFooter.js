@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { SERVICE_PAGES } from "@/lib/servicePages";
+import { CITY, COUNTRY, EMAIL, WHATSAPP, WHATSAPP_URL } from "@/lib/site";
 
 export default function SiteFooter() {
   return (
@@ -22,7 +24,7 @@ export default function SiteFooter() {
             </p>
           </div>
           <div>
-            <h4>Company</h4>
+            <h2 className="footer-title">Company</h2>
             <ul>
               <li>
                 <Link href="/white-label">White Label</Link>
@@ -39,7 +41,7 @@ export default function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h4>Industries</h4>
+            <h2 className="footer-title">Industries</h2>
             <ul>
               <li>
                 <Link href="/dental">Dental</Link>
@@ -68,15 +70,31 @@ export default function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h4>Get in touch</h4>
+            <h2 className="footer-title">Services</h2>
             <ul>
               <li>
-                <a href="mailto:hello@mindandmatrix.com">hello@mindandmatrix.com</a>
+                <Link href="/white-label">White Label Agency</Link>
+              </li>
+              {SERVICE_PAGES.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/${s.slug}`}>{s.navLabel}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="footer-title">Get in touch</h2>
+            <ul>
+              <li>
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
               </li>
               <li>
-                <a href="https://wa.me/8801737054053" target="_blank" rel="noopener">
-                  WhatsApp: +8801737054053
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener">
+                  WhatsApp: {WHATSAPP}
                 </a>
+              </li>
+              <li>
+                {CITY}, {COUNTRY}
               </li>
             </ul>
           </div>

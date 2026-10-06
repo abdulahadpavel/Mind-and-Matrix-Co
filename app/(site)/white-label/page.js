@@ -3,9 +3,11 @@ import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 
 export const metadata = {
-  title: "White Label Paid Media for Agencies",
+  title: "White Label Agency — White Label Google Ads, Facebook Ads & PPC",
   description:
-    "Resell Google Ads, Meta Ads, LinkedIn Ads, creatives, landing pages, tracking and reporting under your agency's brand. Mind and Matrix Co. does the work; your clients only ever see you.",
+    "Looking for the best white label agency? Resell Google Ads, Facebook & Instagram ads, creatives, landing pages, conversion tracking and reporting under your agency's brand. Mind and Matrix Co. does the work; your clients only ever see you.",
+  keywords: ["white label agency", "best white label agency", "white label PPC", "white label Google Ads", "white label Facebook ads", "white label digital marketing"],
+  alternates: { canonical: "/white-label" },
 };
 
 const STEPS = [

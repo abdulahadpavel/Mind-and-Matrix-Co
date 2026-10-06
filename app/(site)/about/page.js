@@ -1,7 +1,12 @@
 import Link from "next/link";
 import HeroBackdrop from "@/components/HeroBackdrop";
 
-export const metadata = { title: "About Us" };
+export const metadata = {
+  title: "About Us — The Team Behind Mind and Matrix Co.",
+  description:
+    "Meet Mind and Matrix Co. (mindandmatrixco), a digital advertising agency in Dhaka, Bangladesh founded by Abdul Ahad Pavel and Partho Sharothi Paul. Paid media, creatives, tracking and CRM for agencies and brands.",
+  alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
   return (

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const NAV = [
   { href: "/white-label", label: "White Label" },
+  { href: "/services", label: "Services" },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/dental", label: "Dental" },
   { href: "/about", label: "About Us" },

@@ -3,12 +3,36 @@ import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import { safeListPublished } from "@/lib/caseStudies";
+import { SERVICE_PAGES } from "@/lib/servicePages";
+import { DEFAULT_DESCRIPTION, jsonLdScript } from "@/lib/site";
+
+export const metadata = {
+  title: { absolute: "Mind and Matrix Co. | White Label Digital Advertising Agency" },
+  description: DEFAULT_DESCRIPTION,
+  alternates: { canonical: "/" },
+};
+
+const FAQS = [
+  ["Will my clients ever find out you are involved?", "No. We work inside accounts under your agency’s access, use your branding on every report and sign an NDA. If you want us on a call, we join as members of your team."],
+  ["How does pricing work?", "You pay us a wholesale fee per client account (or a monthly fee for a dedicated team). You set your own retail price and keep the difference. No long-term contracts."],
+  ["Who owns the ad accounts?", "Your client (or your agency) always owns the ad accounts, pixels and data. We get partner access only and can be removed at any time."],
+  ["What do you need to get started?", "A short partner call, a signed NDA and access to one client account. We start with a free audit so you can see our work before you commit."],
+  ["How do we communicate?", "Slack, email or WhatsApp — whatever your team uses. You get weekly updates and a monthly branded report for each client."],
+];
+
+// FAQ rich-result data for Google and Bing.
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+};
 
 export default async function HomePage() {
   const caseStudies = await safeListPublished({ featured: true, limit: 3 });
 
   return (
     <main id="main">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(FAQ_SCHEMA)} />
       <section className="hero">
         <HeroBackdrop />
         <div className="wrap hero-grid">
@@ -987,47 +1011,51 @@ export default async function HomePage() {
         </div>
       </section>
       <section className="section">
+        <div className="wrap home-about">
+          <div className="reveal">
+            <span className="eyebrow">About Mind and Matrix Co.</span>
+            <h2>A digital advertising agency that works as your team</h2>
+            <p>
+              Mind and Matrix Co. (also known as mindandmatrixco) is a white label digital advertising agency based in
+              Dhaka, Bangladesh. We plan and run Google Ads, Facebook and Instagram ads, YouTube and LinkedIn campaigns,
+              create the ad creatives, build landing pages, and set up the conversion tracking and web analytics that
+              prove what’s working.
+            </p>
+            <p>
+              Marketing agencies in the US, UK, Canada and Australia use us as their behind-the-scenes paid media team,
+              and brands in Bangladesh and abroad hire us directly. Whether you need the best white label agency for
+              your clients or a performance-focused digital marketing agency for your own business, we judge our work
+              by one thing: leads, sales and revenue.
+            </p>
+          </div>
+          <ul className="home-about-links reveal">
+            <li>
+              <Link href="/white-label">White label agency services →</Link>
+            </li>
+            {SERVICE_PAGES.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/${p.slug}`}>{p.metaTitle.split(" — ")[0]} →</Link>
+              </li>
+            ))}
+            <li>
+              <Link href="/case-studies">Case studies →</Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section className="section section-soft">
         <div className="wrap">
           <div className="section-head reveal">
             <span className="eyebrow">FAQ</span>
             <h2>Questions agencies ask us</h2>
           </div>
           <div className="faq">
-            <details>
-              <summary>Will my clients ever find out you are involved?</summary>
-              <p>
-                No. We work inside accounts under your agency’s access, use your branding on every report and
-                sign an NDA. If you want us on a call, we join as members of your team.
-              </p>
-            </details>
-            <details>
-              <summary>How does pricing work?</summary>
-              <p>
-                You pay us a wholesale fee per client account (or a monthly fee for a dedicated team). You set
-                your own retail price and keep the difference. No long-term contracts.
-              </p>
-            </details>
-            <details>
-              <summary>Who owns the ad accounts?</summary>
-              <p>
-                Your client (or your agency) always owns the ad accounts, pixels and data. We get partner
-                access only and can be removed at any time.
-              </p>
-            </details>
-            <details>
-              <summary>What do you need to get started?</summary>
-              <p>
-                A short partner call, a signed NDA and access to one client account. We start with a free
-                audit so you can see our work before you commit.
-              </p>
-            </details>
-            <details>
-              <summary>How do we communicate?</summary>
-              <p>
-                Slack, email or WhatsApp — whatever your team uses. You get weekly updates and a monthly
-                branded report for each client.
-              </p>
-            </details>
+            {FAQS.map(([q, a]) => (
+              <details key={q}>
+                <summary>{q}</summary>
+                <p>{a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>

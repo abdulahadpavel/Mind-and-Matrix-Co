@@ -157,6 +157,7 @@ function revalidateCaseStudyPages(...slugs) {
   revalidatePath("/");
   revalidatePath("/case-studies");
   revalidatePath("/case-studies/[slug]", "page");
+  revalidatePath("/sitemap.xml");
   for (const slug of slugs) if (slug) revalidatePath(`/case-studies/${slug}`);
 }
 

@@ -2,8 +2,8 @@
 
 The Mind and Matrix website in Next.js (App Router, JavaScript), with an admin panel that saves every form submission in a Postgres database (Neon).
 
-- Live site: https://mind-and-matrix.vercel.app
-- Admin panel: https://mind-and-matrix.vercel.app/admin — sign in with your admin email and password
+- Live site: https://www.mindandmatrixco.com (mind-and-matrix.vercel.app and mindandmatrixco.com redirect here)
+- Admin panel: https://www.mindandmatrixco.com/admin — sign in with your admin email and password
 
 ## Run locally
 
@@ -70,3 +70,10 @@ vercel deploy --prod
 ```
 
 The build runs the database migrations first, then builds the site.
+
+## SEO
+
+- `lib/site.js` holds the site address, business name, email and WhatsApp used everywhere (pages, footer, structured data).
+- `app/sitemap.js` → `/sitemap.xml` (includes every published case study), `app/robots.js` → `/robots.txt`, `app/opengraph-image.js` → share image.
+- Service landing pages live in `lib/servicePages.js` (content) and render through `components/ServicePage.js` at `/<slug>`. Add a page by adding an entry there.
+- Google Search Console / Bing Webmaster Tools: set `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION` in Vercel env vars (the meta tag's `content` value), redeploy, then submit `https://www.mindandmatrixco.com/sitemap.xml`.
