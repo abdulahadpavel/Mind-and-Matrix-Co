@@ -1,14 +1,14 @@
 import Link from "next/link";
 
 // One case study as a clickable card (used on the home page, /case-studies and below each case study).
-export default function CaseStudyCard({ cs, headingLevel = 3 }) {
+export default function CaseStudyCard({ cs, headingLevel = 3, reveal = true, className = "", eager = false }) {
   const Heading = `h${headingLevel}`;
   const metrics = (cs.metrics || []).slice(0, 3);
   return (
-    <Link href={`/case-studies/${cs.slug}`} className="cs-card reveal">
+    <Link href={`/case-studies/${cs.slug}`} className={["cs-card", reveal && "reveal", className].filter(Boolean).join(" ")}>
       <div className="cs-card-media">
         {cs.cover_url ? (
-          <img src={cs.cover_url} alt={cs.cover_alt || ""} loading="lazy" />
+          <img src={cs.cover_url} alt={cs.cover_alt || ""} loading={eager ? "eager" : "lazy"} />
         ) : (
           <div className="cs-card-placeholder" aria-hidden="true">
             {metrics[0]?.value || cs.client || "Case study"}
