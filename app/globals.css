@@ -878,3 +878,15 @@ html:has(.booking-dialog[open]) { overflow: hidden; }
   .cs-card-row { flex-direction: column; }
   .cs-card-row .cs-card-media { flex: none; aspect-ratio: 16 / 9; min-height: 0; }
 }
+
+/* Numbered pager: ‹ 1 2 3 › */
+.cs-carousel-controls { justify-content: space-between; flex-wrap: wrap; }
+.cs-carousel-count { min-width: 0; }
+.cs-carousel-pager { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cs-carousel-pager .cs-carousel-arrow { width: 44px; height: 44px; }
+.cs-carousel-page-btn { min-width: 44px; height: 44px; padding: 0 10px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.cs-carousel-page-btn:hover { border-color: var(--blue); color: var(--blue); }
+.cs-carousel-page-btn.is-active { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 8px 20px rgba(47,107,255,.3); }
+.cs-carousel-page-btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.cs-carousel { scroll-margin-top: 96px; }
+.cs-carousel-bottom { display: flex; justify-content: center; margin-top: 20px; }

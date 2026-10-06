@@ -40,10 +40,52 @@ export default function CaseStudyCarousel({ children, label = "Case studies", pe
     };
   }, []);
 
+  const rootRef = useRef(null);
+
+  // The pager under the cards also scrolls back up so the new cards are in view.
+  const move = (i, fromBottom) => {
+    goTo(i);
+    if (fromBottom) rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const renderPager = (fromBottom) => (
+    <div className="cs-carousel-pager">
+      <button
+        type="button"
+        className="cs-carousel-arrow"
+        onClick={() => move(index - 1, fromBottom)}
+        aria-label={perPage > 1 ? "Previous page" : "Previous case study"}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+      </button>
+      {slides.map((_, i) => (
+        <button
+          type="button"
+          key={i}
+          className={i === index ? "cs-carousel-page-btn is-active" : "cs-carousel-page-btn"}
+          aria-label={perPage > 1 ? `Page ${i + 1}` : `Case study ${i + 1}`}
+          aria-current={i === index ? "page" : undefined}
+          onClick={() => move(i, fromBottom)}
+        >
+          {i + 1}
+        </button>
+      ))}
+      <button
+        type="button"
+        className="cs-carousel-arrow"
+        onClick={() => move(index + 1, fromBottom)}
+        aria-label={perPage > 1 ? "Next page" : "Next case study"}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+      </button>
+    </div>
+  );
+
   if (!count) return null;
 
   return (
     <div
+      ref={rootRef}
       className="cs-carousel"
       role="region"
       aria-roledescription="carousel"
@@ -54,29 +96,14 @@ export default function CaseStudyCarousel({ children, label = "Case studies", pe
       }}
     >
       {count > 1 && (
-        <div className="cs-carousel-controls">
+        <nav className="cs-carousel-controls" aria-label={perPage > 1 ? "Case study pages" : "Case studies"}>
           <span className="cs-carousel-count" aria-live="polite">
-            {index + 1} / {count}
+            {perPage > 1
+              ? (() => { const a = index * perPage + 1; const b = Math.min(items.length, (index + 1) * perPage); return a === b ? `Showing ${a} of ${items.length}` : `Showing ${a}–${b} of ${items.length}`; })()
+              : `${index + 1} of ${count}`}
           </span>
-          <div className="cs-carousel-dots">
-            {slides.map((_, i) => (
-              <button
-                type="button"
-                key={i}
-                className={i === index ? "is-active" : ""}
-                aria-label={perPage > 1 ? `Show page ${i + 1}` : `Show case study ${i + 1}`}
-                aria-current={i === index ? "true" : undefined}
-                onClick={() => goTo(i)}
-              />
-            ))}
-          </div>
-          <button type="button" className="cs-carousel-arrow" onClick={() => goTo(index - 1)} aria-label={perPage > 1 ? "Previous case studies" : "Previous case study"}>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
-          </button>
-          <button type="button" className="cs-carousel-arrow" onClick={() => goTo(index + 1)} aria-label={perPage > 1 ? "More case studies" : "Next case study"}>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
-          </button>
-        </div>
+          {renderPager(false)}
+        </nav>
       )}
       <div className="cs-carousel-track" ref={trackRef}>
         {slides.map((slide, i) => (
@@ -94,6 +121,7 @@ export default function CaseStudyCarousel({ children, label = "Case studies", pe
         ))}
       </div>
 
+      {count > 1 && perPage > 1 && <div className="cs-carousel-bottom">{renderPager(true)}</div>}
     </div>
   );
 }
