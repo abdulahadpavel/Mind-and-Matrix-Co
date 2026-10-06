@@ -439,7 +439,7 @@ export default function CaseStudyEditor({ caseStudy, canDelete, justCreated = fa
               <label>
                 Order
                 <input type="number" name="sort_order" defaultValue={cs.sort_order} min={-9999} max={9999} />
-                <small>Lower numbers show first.</small>
+                <small>Newest case studies show first. This number only orders ones added at the same time (lower first).</small>
               </label>
             </section>
 

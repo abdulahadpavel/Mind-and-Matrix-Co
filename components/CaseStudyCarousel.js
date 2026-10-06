@@ -4,8 +4,11 @@ import { Children, useCallback, useEffect, useRef, useState } from "react";
 
 // Shows one slide at a time. Arrows (and the keyboard arrows) move between slides;
 // on phones you can also swipe, because the track is a scroll-snap strip.
-export default function CaseStudyCarousel({ children, label = "Case studies" }) {
-  const slides = Children.toArray(children);
+export default function CaseStudyCarousel({ children, label = "Case studies", perPage = 1 }) {
+  // Group the cards into pages of `perPage` (e.g. 3 stacked cards per page).
+  const items = Children.toArray(children);
+  const slides = [];
+  for (let i = 0; i < items.length; i += perPage) slides.push(items.slice(i, i + perPage));
   const count = slides.length;
   const trackRef = useRef(null);
   const [index, setIndex] = useState(0);
@@ -61,16 +64,16 @@ export default function CaseStudyCarousel({ children, label = "Case studies" }) 
                 type="button"
                 key={i}
                 className={i === index ? "is-active" : ""}
-                aria-label={`Show case study ${i + 1}`}
+                aria-label={perPage > 1 ? `Show page ${i + 1}` : `Show case study ${i + 1}`}
                 aria-current={i === index ? "true" : undefined}
                 onClick={() => goTo(i)}
               />
             ))}
           </div>
-          <button type="button" className="cs-carousel-arrow" onClick={() => goTo(index - 1)} aria-label="Previous case study">
+          <button type="button" className="cs-carousel-arrow" onClick={() => goTo(index - 1)} aria-label={perPage > 1 ? "Previous case studies" : "Previous case study"}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
           </button>
-          <button type="button" className="cs-carousel-arrow" onClick={() => goTo(index + 1)} aria-label="Next case study">
+          <button type="button" className="cs-carousel-arrow" onClick={() => goTo(index + 1)} aria-label={perPage > 1 ? "More case studies" : "Next case study"}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
           </button>
         </div>
@@ -86,7 +89,7 @@ export default function CaseStudyCarousel({ children, label = "Case studies" }) 
             aria-hidden={i !== index}
             inert={i !== index ? true : undefined}
           >
-            {slide}
+            <div className="cs-carousel-page">{slide}</div>
           </div>
         ))}
       </div>

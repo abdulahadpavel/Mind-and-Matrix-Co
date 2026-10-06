@@ -20,15 +20,15 @@ export default async function CaseStudiesPage() {
           <div className="section-head cs-index-head">
             <span className="eyebrow">Our work</span>
             <h1>Results we’ve delivered</h1>
-            <p>Use the arrows to browse our case studies. Click one to see the challenge, the strategy and the full numbers.</p>
+            <p>Our latest work first. Click any case study to see the challenge, the strategy and the full numbers.</p>
           </div>
 
           <div className="cs-index-grid">
             <div className="cs-index-cards">
               {caseStudies.length > 0 ? (
-                <CaseStudyCarousel label="Case studies">
+                <CaseStudyCarousel label="Case studies" perPage={3}>
                   {caseStudies.map((cs, i) => (
-                    <CaseStudyCard key={cs.id} cs={cs} headingLevel={2} reveal={false} className="cs-card-lg" eager={i === 0} />
+                    <CaseStudyCard key={cs.id} cs={cs} headingLevel={2} reveal={false} className="cs-card-row" eager={i < 3} />
                   ))}
                 </CaseStudyCarousel>
               ) : (
