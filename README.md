@@ -23,6 +23,7 @@ Website: http://localhost:3000 · Admin: http://localhost:3000/admin
 | --- | --- |
 | Dashboard | New/7-day/30-day/won counts, leads per day, leads by form, pipeline, latest leads, recent activity |
 | Submissions | Search, filter by status/form/date, sort, select rows for bulk status changes or trash, export CSV (respects filters) |
+| Case studies | Write, edit, publish or hide case studies; upload a cover image, images and files (PDF, Word, Excel…) into the content; choose which show on the home page. Saving updates the live site right away |
 | Submission page | All details and tracking (UTMs, click IDs), status, notes from your team, full change history, email/call/WhatsApp buttons |
 | Trash | Deleted leads keep all their data here; restore any time. Only owners can delete forever |
 | Admin users (owners) | Add admins, reset their password (signs them out), remove them |
@@ -50,10 +51,13 @@ npm run admin:create -- --email you@example.com --name "Your Name" --password "a
 
 | Path | What it is |
 | --- | --- |
-| `app/(site)/` | Public pages: `/`, `/dental`, `/about`, `/contact` |
+| `app/(site)/` | Public pages: `/`, `/white-label`, `/case-studies`, `/case-studies/<slug>`, `/dental`, `/about`, `/contact` |
 | `components/LeadForm.js` | The lead form used on Home, Dental and Contact |
 | `app/api/submissions/route.js` | Receives form posts |
 | `app/admin/` | Admin panel (`(panel)/` pages, `actions.js` server actions, `_components/`) |
+| `app/admin/(panel)/case-studies/` | Case study list and editor |
+| `lib/caseStudies.js`, `components/Markdown.js` | Case study queries and the safe content renderer |
+| `lib/uploads.js`, `app/api/admin/uploads/`, `app/files/` | File uploads (stored in Postgres, max 4 MB each) and serving them at `/files/<id>/<name>` |
 | `lib/db.js` | Postgres connection pool |
 | `lib/submissions.js`, `lib/users.js`, `lib/auth.js` | Database queries, users, sign-in and sessions |
 | `db/migrations/*.sql` | Database schema; applied automatically before every build (`npm run db:migrate`) |

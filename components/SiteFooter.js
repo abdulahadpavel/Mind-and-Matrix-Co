@@ -28,6 +28,9 @@ export default function SiteFooter() {
                 <Link href="/white-label">White Label</Link>
               </li>
               <li>
+                <Link href="/case-studies">Case Studies</Link>
+              </li>
+              <li>
                 <Link href="/about">About Us</Link>
               </li>
               <li>

@@ -1,8 +1,12 @@
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
+import CaseStudyCard from "@/components/CaseStudyCard";
+import { safeListPublished } from "@/lib/caseStudies";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const caseStudies = await safeListPublished({ featured: true, limit: 3 });
+
   return (
     <main id="main">
       <section className="hero">
@@ -100,6 +104,27 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      {caseStudies.length > 0 && (
+        <section className="section cs-home" id="case-studies">
+          <div className="wrap">
+            <div className="section-head reveal">
+              <span className="eyebrow">Case studies</span>
+              <h2>Real campaigns. Real numbers.</h2>
+              <p>Revenue, bookings and leads from campaigns our team has run. This is the work you can sell as your own.</p>
+            </div>
+            <div className="grid g3 cs-grid">
+              {caseStudies.map((cs) => (
+                <CaseStudyCard key={cs.id} cs={cs} headingLevel={3} />
+              ))}
+            </div>
+            <p className="cs-all-link">
+              <Link className="btn btn-outline" href="/case-studies">
+                View all case studies
+              </Link>
+            </p>
+          </div>
+        </section>
+      )}
       <section className="section section-soft">
         <div className="wrap split">
           <div className="reveal">

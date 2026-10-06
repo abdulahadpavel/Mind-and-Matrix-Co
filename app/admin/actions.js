@@ -2,7 +2,7 @@
 
 // Every action re-checks the session: Server Actions can be called directly, not only from our UI.
 import { redirect } from "next/navigation";
-import { refresh } from "next/cache";
+import { refresh, revalidatePath } from "next/cache";
 import { endSessions, login, logout, requireAdmin, requireOwner } from "@/lib/auth";
 import {
   addNote,
@@ -14,6 +14,13 @@ import {
 } from "@/lib/submissions";
 import { changeOwnPassword, createUser, deleteUser, setPassword, updateProfile } from "@/lib/users";
 import { resolveBookingUrl, setSetting } from "@/lib/settings";
+import {
+  createCaseStudy,
+  deleteCaseStudy,
+  parseCaseStudyForm,
+  slugTaken,
+  updateCaseStudy,
+} from "@/lib/caseStudies";
 
 const ids = (formData) => formData.getAll("ids").map(String).filter(isUuid);
 
@@ -141,4 +148,48 @@ export async function saveBookingAction(_prev, formData) {
   await setSetting("booking_url", result.url, admin);
   refresh();
   return { ok: true, at: Date.now(), message: result.url ? "Saved. The calendar now opens after every form submission." : "Saved. The calendar is turned off." };
+}
+
+// ---------- Case studies ----------
+
+// Clears the cached public pages that show case studies so edits appear right away.
+function revalidateCaseStudyPages(...slugs) {
+  revalidatePath("/");
+  revalidatePath("/case-studies");
+  revalidatePath("/case-studies/[slug]", "page");
+  for (const slug of slugs) if (slug) revalidatePath(`/case-studies/${slug}`);
+}
+
+export async function saveCaseStudyAction(_prev, formData) {
+  const admin = await requireAdmin();
+  const rawId = String(formData.get("id") || "");
+  const id = isUuid(rawId) ? rawId : null;
+
+  const { data, error } = parseCaseStudyForm(formData);
+  if (error) return { error };
+  if (await slugTaken(data.slug, id)) {
+    return { error: `Another case study already uses the link /case-studies/${data.slug}. Choose a different URL slug.` };
+  }
+
+  if (id) {
+    const row = await updateCaseStudy(id, data, admin);
+    if (!row) return { error: "This case study no longer exists. It may have been deleted." };
+    revalidateCaseStudyPages(row.slug, row.old_slug);
+    refresh();
+    return { ok: true, at: Date.now(), id: row.id, slug: row.slug, status: data.status };
+  }
+
+  const row = await createCaseStudy(data, admin);
+  revalidateCaseStudyPages(row.slug);
+  return { ok: true, at: Date.now(), id: row.id, slug: row.slug, status: data.status, created: true };
+}
+
+export async function deleteCaseStudyAction(formData) {
+  await requireOwner();
+  const id = String(formData.get("id") || "");
+  if (isUuid(id)) {
+    const row = await deleteCaseStudy(id);
+    if (row) revalidateCaseStudyPages(row.slug);
+  }
+  redirect("/admin/case-studies");
 }

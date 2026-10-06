@@ -9,6 +9,9 @@ const nextConfig = {
       { source: "/dental.html", destination: "/dental", permanent: true },
       { source: "/about.html", destination: "/about", permanent: true },
       { source: "/contact.html", destination: "/contact", permanent: true },
+      // Old WordPress case study links (mindandmatrix.com/case-study/<slug>/).
+      { source: "/case-study", destination: "/case-studies", permanent: true },
+      { source: "/case-study/:slug", destination: "/case-studies/:slug", permanent: true },
     ];
   },
 };

@@ -8,7 +8,13 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+// Full site address, used for share images and canonical links.
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Mind and Matrix Co. | White Label Paid Media Agency",
     template: "%s | Mind and Matrix Co.",
