@@ -1,13 +1,34 @@
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
+import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
+import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
-  title: "White Label Agency — White Label Google Ads, Facebook Ads & PPC",
+  title: "Best White Label Advertising Agency — Canada, Australia, California, Texas & Florida",
   description:
-    "Looking for the best white label agency? Resell Google Ads, Facebook & Instagram ads, creatives, landing pages, conversion tracking and reporting under your agency's brand. Mind and Matrix Co. does the work; your clients only ever see you.",
-  keywords: ["white label agency", "best white label agency", "white label PPC", "white label Google Ads", "white label Facebook ads", "white label digital marketing"],
+    "Mind and Matrix Co. is a white label advertising agency for agencies in Canada, Australia, California, Texas and Florida. Google Ads, Facebook & Instagram ads, Microsoft Ads and tracking — run under your brand.",
+  keywords: [
+    "best white label advertising agency",
+    "white label advertising agency",
+    "white label advertising agency Canada",
+    "white label advertising agency Australia",
+    "white label advertising agency California",
+    "white label advertising agency Texas",
+    "white label advertising agency Florida",
+    "white label PPC agency",
+    "white label agency",
+    "best white label agency",
+    "white label Google Ads",
+    "white label Facebook ads",
+  ],
   alternates: { canonical: "/white-label" },
+  openGraph: {
+    title: "Best White Label Advertising Agency — Canada, Australia, California, Texas & Florida",
+    description:
+      "White label Google Ads, Facebook ads, Microsoft Ads and tracking for agencies in Canada, Australia, California, Texas and Florida.",
+    url: "/white-label",
+  },
 };
 
 const STEPS = [
@@ -45,22 +66,57 @@ const FAQ = [
   ["Who owns the ad accounts and data?", "Your client (or your agency) always owns the ad accounts, pixels and data. We get partner access only and can be removed at any time."],
   ["Which channels do you cover?", "Google Ads, Meta (Facebook & Instagram), Microsoft Ads, LinkedIn Ads, YouTube and Google Business Profile, plus the creatives, landing pages, tracking, CRM and reporting behind them."],
   ["What do you need to get started?", "A short partner call, a signed NDA and access to one client account. We start with a free audit so you can see our work before you commit."],
-  ["Do you work with agencies outside the US?", "Yes. Our working hours overlap with US, UK and Australian agencies, with fast replies on Slack, email or WhatsApp."],
+  ["What makes the best white label advertising agency?", "Look for one that sets up accurate conversion tracking before spending, reports on leads and sales rather than clicks, signs an NDA, never contacts your clients, and can show real case studies. We start with a free audit so you can judge our work before you commit."],
+  ["Do you work with agencies in Canada and Australia?", "Yes. Canadian agencies get overnight turnaround because our Dhaka team works while Canada sleeps, and Australian agencies share most of their business day with us. Budgets and reports can be in CAD or AUD."],
+  ["Do you work with agencies in California, Texas and Florida?", "Yes. We run white label Google Ads, Facebook and Instagram ads and Microsoft Ads for agencies across the US, including California, Texas and Florida, with city-level targeting and reports in your brand."],
+  ["Do you work with agencies outside the US?", "Yes. Our working hours overlap with US, UK, Canadian and Australian agencies, with fast replies on Slack, email or WhatsApp."],
   ["Will you ever contact my clients directly?", "Never — unless you ask us to, and then only as part of your team. A non-solicitation agreement is part of every partnership."],
 ];
+
+const URL_WL = absoluteUrl("/white-label");
+const STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${URL_WL}#service`,
+      name: "White label advertising agency services",
+      serviceType: "White label advertising and paid media management",
+      description:
+        "White label Google Ads, Facebook and Instagram ads, Microsoft Ads, creatives, landing pages, conversion tracking and reporting, delivered under the partner agency's brand.",
+      url: URL_WL,
+      provider: { "@id": `${SITE_URL}/#organization`, name: SITE_NAME },
+      audience: { "@type": "BusinessAudience", audienceType: "Marketing agencies" },
+      areaServed: LOCATIONS.map((l) => ({ "@type": l.schemaType, name: l.name })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${URL_WL}#faq`,
+      mainEntity: FAQ.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+        { "@type": "ListItem", position: 2, name: "White label advertising agency", item: URL_WL },
+      ],
+    },
+  ],
+};
 
 export default function WhiteLabelPage() {
   return (
     <main id="main">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(STRUCTURED_DATA)} />
       <section className="hero">
         <HeroBackdrop />
         <div className="wrap hero-grid">
           <div>
             <span className="hero-badge">
-              <i /> White-label paid media for agencies
+              <i /> White label advertising for agencies in {LOCATION_LIST}
             </span>
             <h1>
-              Sell paid media under <em>your brand.</em> We do the work.
+              The white label advertising agency that works <em>under your brand.</em>
             </h1>
             <p className="hero-lead">
               Mind and Matrix Co. becomes your agency’s invisible ad department: strategy, campaign management,
@@ -216,6 +272,36 @@ export default function WhiteLabelPage() {
             <Link className="btn btn-outline" href="/about">
               Meet the team
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-dark" id="locations">
+        <div className="wrap">
+          <div className="section-head reveal">
+            <span className="eyebrow">Where we work</span>
+            <h2>White label advertising agency for {LOCATION_LIST}</h2>
+            <p>
+              Agencies in these markets use us as their behind-the-scenes ad team. Same process everywhere: tracking
+              first, weekly optimization and reports in your brand.
+            </p>
+          </div>
+          <div className="loc-grid">
+            {LOCATIONS.map((loc) => (
+              <article className="loc-card reveal" id={loc.id} key={loc.id}>
+                <span className="loc-tag">{loc.name}</span>
+                <h3>{loc.heading}</h3>
+                <p>{loc.intro}</p>
+                <ul className="checks">
+                  {loc.points.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+                <a className="loc-cta" href="#partner-form">
+                  Get a free proposal for your {loc.name} agency <span aria-hidden="true">→</span>
+                </a>
+              </article>
+            ))}
           </div>
         </div>
       </section>

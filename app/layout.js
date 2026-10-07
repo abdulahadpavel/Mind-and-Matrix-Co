@@ -79,12 +79,22 @@ const ORGANIZATION = {
       telephone: WHATSAPP,
       description: DEFAULT_DESCRIPTION,
       address: { "@type": "PostalAddress", addressLocality: CITY, addressCountry: "BD" },
-      areaServed: ["Bangladesh", "United States", "United Kingdom", "Canada", "Australia", "Worldwide"],
+      areaServed: [
+        { "@type": "Country", name: "Bangladesh" },
+        { "@type": "Country", name: "United States" },
+        { "@type": "Country", name: "Canada" },
+        { "@type": "Country", name: "Australia" },
+        { "@type": "Country", name: "United Kingdom" },
+        { "@type": "State", name: "California" },
+        { "@type": "State", name: "Texas" },
+        { "@type": "State", name: "Florida" },
+      ],
       founder: [
         { "@type": "Person", name: "Abdul Ahad Pavel", jobTitle: "Co-Founder · AdTech, CRO & Business System Engineer" },
         { "@type": "Person", name: "Partho Sharothi Paul" },
       ],
       knowsAbout: [
+        "White label advertising",
         "White label digital marketing",
         "Google Ads management",
         "Facebook and Instagram advertising",

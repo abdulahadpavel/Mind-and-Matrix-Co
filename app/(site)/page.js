@@ -4,6 +4,7 @@ import HeroBackdrop from "@/components/HeroBackdrop";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import { safeListPublished } from "@/lib/caseStudies";
 import { SERVICE_PAGES } from "@/lib/servicePages";
+import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
 import { DEFAULT_DESCRIPTION, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
@@ -1022,10 +1023,19 @@ export default async function HomePage() {
               prove what’s working.
             </p>
             <p>
-              Marketing agencies in the US, UK, Canada and Australia use us as their behind-the-scenes paid media team,
+              Marketing agencies in {LOCATION_LIST} use us as their behind-the-scenes paid media team,
               and brands in Bangladesh and abroad hire us directly. Whether you need the best white label agency for
               your clients or a performance-focused digital marketing agency for your own business, we judge our work
               by one thing: leads, sales and revenue.
+            </p>
+            <p className="home-locations">
+              <b>White label advertising agency for:</b>{" "}
+              {LOCATIONS.map((l, i) => (
+                <span key={l.id}>
+                  {i > 0 && " · "}
+                  <Link href={`/white-label#${l.id}`}>{l.name}</Link>
+                </span>
+              ))}
             </p>
           </div>
           <ul className="home-about-links reveal">

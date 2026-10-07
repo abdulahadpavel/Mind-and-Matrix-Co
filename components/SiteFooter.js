@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { CITY, COUNTRY, EMAIL, WHATSAPP, WHATSAPP_URL } from "@/lib/site";
+import { LOCATIONS } from "@/lib/locations";
 
 export default function SiteFooter() {
   return (
@@ -99,6 +100,14 @@ export default function SiteFooter() {
             </ul>
           </div>
         </div>
+        <nav className="footer-locations" aria-label="Where we work">
+          <span>White label advertising agency for:</span>
+          {LOCATIONS.map((l) => (
+            <Link key={l.id} href={`/white-label#${l.id}`}>
+              {l.name}
+            </Link>
+          ))}
+        </nav>
         <div className="footer-bottom">
           <span>&copy; {new Date().getFullYear()} Mind and Matrix Co. All rights reserved.</span>{" "}
           <span>100% white label · NDA on request · Your brand, our team</span>

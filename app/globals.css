@@ -921,3 +921,22 @@ html:has(.booking-dialog[open]) { overflow: hidden; }
 .home-about-links a { display: block; padding: 14px 18px; background: #fff; border: 1px solid var(--line); border-radius: 12px; font-weight: 700; color: var(--ink); transition: border-color .2s, color .2s; }
 .home-about-links a:hover { border-color: var(--blue); color: var(--blue); }
 @media (max-width: 900px) { .home-about { grid-template-columns: 1fr; gap: 28px; } }
+
+/* ---------- White label: locations ---------- */
+.loc-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.loc-card { grid-column: span 2; display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: var(--radius-lg); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); scroll-margin-top: 96px; }
+.loc-card:nth-child(4), .loc-card:nth-child(5) { grid-column: span 3; }
+.loc-card h3 { font-size: 1.2rem; margin: 0; color: #fff; }
+.loc-card p { margin: 0; color: rgba(255,255,255,.78); font-size: 15.5px; }
+.loc-card .checks { margin: 4px 0 0; padding: 0; gap: 8px; }
+.loc-card .checks li { color: rgba(255,255,255,.88); font-size: 14.5px; }
+.loc-tag { align-self: flex-start; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #0A1730; background: #7FE3C4; padding: 4px 10px; border-radius: 999px; }
+.loc-cta { margin-top: auto; padding-top: 6px; font-weight: 700; color: #9DB8FF; }
+.loc-cta:hover { color: #fff; }
+@media (max-width: 980px) { .loc-grid { grid-template-columns: 1fr 1fr; } .loc-card, .loc-card:nth-child(4), .loc-card:nth-child(5) { grid-column: auto; } .loc-card:nth-child(5) { grid-column: 1 / -1; } }
+@media (max-width: 640px) { .loc-grid { grid-template-columns: 1fr; } .loc-card:nth-child(5) { grid-column: auto; } }
+.footer-locations { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; padding: 18px 0; margin-bottom: 8px; border-top: 1px solid rgba(255,255,255,.08); font-size: 14px; }
+.footer-locations span { color: rgba(255,255,255,.6); font-weight: 600; }
+.footer-locations a { color: rgba(255,255,255,.85); }
+.footer-locations a:hover { color: #fff; }
+.home-locations { font-size: 15.5px; }

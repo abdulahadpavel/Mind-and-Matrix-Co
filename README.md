@@ -77,3 +77,5 @@ The build runs the database migrations first, then builds the site.
 - `app/sitemap.js` → `/sitemap.xml` (includes every published case study), `app/robots.js` → `/robots.txt`, `app/opengraph-image.js` → share image.
 - Service landing pages live in `lib/servicePages.js` (content) and render through `components/ServicePage.js` at `/<slug>`. Add a page by adding an entry there.
 - Google Search Console / Bing Webmaster Tools: set `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION` in Vercel env vars (the meta tag's `content` value), redeploy, then submit `https://www.mindandmatrixco.com/sitemap.xml`.
+- Location targeting (Canada, Australia, California, Texas, Florida) lives in `lib/locations.js` and shows on `/white-label#<id>`, the home page and the footer.
+- Bing / IndexNow: after a deploy that changes pages, run `npm run indexnow` (whole sitemap) or `npm run indexnow -- /white-label /` (specific pages). The key file is in `public/`.
