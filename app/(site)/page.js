@@ -15,6 +15,8 @@ export const metadata = {
 };
 
 const FAQS = [
+  ["What is Mind and Matrix Co.?", "Mind and Matrix Co. is a white label PPC and performance marketing agency based in Dhaka, Bangladesh. It runs Google Ads, Meta, Microsoft and LinkedIn ads, creatives, landing pages and conversion tracking for marketing agencies under their brand, and dental marketing for dental practices in the US, Canada and Australia."],
+  ["Who founded Mind and Matrix Co.?", "Mind and Matrix Co. was founded by Abdul Ahad Pavel, an AdTech, CRO and tracking specialist, and Partho Sharothi Paul, a media planning and buying lead who has run campaigns for brands like ASUS and Yamaha."],
   ["Will my clients ever find out you are involved?", "No. We work inside accounts under your agency’s access, use your branding on every report and sign an NDA. If you want us on a call, we join as members of your team."],
   ["How does pricing work?", "You pay us a wholesale fee per client account (or a monthly fee for a dedicated team). You set your own retail price and keep the difference. No long-term contracts."],
   ["Who owns the ad accounts?", "Your client (or your agency) always owns the ad accounts, pixels and data. We get partner access only and can be removed at any time."],

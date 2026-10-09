@@ -121,7 +121,11 @@ const ORGANIZATION = {
         "Google Tag Manager",
         "Landing page optimization",
         "Performance marketing",
+        "Dental marketing",
+        "Dental implant marketing",
+        "HIPAA-aware ad tracking",
       ],
+      slogan: "Your brand. Our ad team.",
       contactPoint: [
         {
           "@type": "ContactPoint",
