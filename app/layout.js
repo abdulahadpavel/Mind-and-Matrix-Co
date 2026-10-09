@@ -86,7 +86,7 @@ const ORGANIZATION = {
         { "@type": "Country", name: "Australia" },
         { "@type": "Country", name: "United Kingdom" },
         { "@type": "State", name: "California" },
-        { "@type": "State", name: "Texas" },
+        { "@type": "State", name: "New York" },
         { "@type": "State", name: "Florida" },
       ],
       founder: [

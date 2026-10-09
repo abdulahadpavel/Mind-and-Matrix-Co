@@ -8,14 +8,14 @@ import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 export const metadata = {
   title: { absolute: "Best White Label Advertising Agency | Mind and Matrix Co." },
   description:
-    "Mind and Matrix Co. is a white label advertising agency for agencies in Canada, Australia, California, Texas and Florida. Google Ads, Facebook & Instagram ads, Microsoft Ads and tracking — run under your brand.",
+    "Mind and Matrix Co. is a white label advertising agency for agencies in Canada, Australia, California, New York and Florida. Google Ads, Facebook & Instagram ads, Microsoft Ads and tracking — run under your brand.",
   keywords: [
     "best white label advertising agency",
     "white label advertising agency",
     "white label advertising agency Canada",
     "white label advertising agency Australia",
     "white label advertising agency California",
-    "white label advertising agency Texas",
+    "white label advertising agency New York",
     "white label advertising agency Florida",
     "white label PPC agency",
     "white label agency",
@@ -27,7 +27,7 @@ export const metadata = {
   openGraph: {
     title: "Best White Label Advertising Agency | Mind and Matrix Co.",
     description:
-      "White label Google Ads, Facebook ads, Microsoft Ads and tracking for agencies in Canada, Australia, California, Texas and Florida.",
+      "White label Google Ads, Facebook ads, Microsoft Ads and tracking for agencies in Canada, Australia, California, New York and Florida.",
     url: "/white-label",
   },
 };
@@ -69,7 +69,7 @@ const FAQ = [
   ["What do you need to get started?", "A short partner call, a signed NDA and access to one client account. We start with a free audit so you can see our work before you commit."],
   ["What makes the best white label advertising agency?", "Look for one that sets up accurate conversion tracking before spending, reports on leads and sales rather than clicks, signs an NDA, never contacts your clients, and can show real case studies. We start with a free audit so you can judge our work before you commit."],
   ["Do you work with agencies in Canada and Australia?", "Yes. Canadian agencies get overnight turnaround because our Dhaka team works while Canada sleeps, and Australian agencies share most of their business day with us. Budgets and reports can be in CAD or AUD."],
-  ["Do you work with agencies in California, Texas and Florida?", "Yes. We run white label Google Ads, Facebook and Instagram ads and Microsoft Ads for agencies across the US, including California, Texas and Florida, with city-level targeting and reports in your brand."],
+  ["Do you work with agencies in California, New York and Florida?", "Yes. We run white label Google Ads, Facebook and Instagram ads and Microsoft Ads for agencies across the US, including California, New York and Florida, with city-level targeting and reports in your brand."],
   ["Do you work with agencies outside the US?", "Yes. Our working hours overlap with US, UK, Canadian and Australian agencies, with fast replies on Slack, email or WhatsApp."],
   ["Will you ever contact my clients directly?", "Never — unless you ask us to, and then only as part of your team. A non-solicitation agreement is part of every partnership."],
 ];
