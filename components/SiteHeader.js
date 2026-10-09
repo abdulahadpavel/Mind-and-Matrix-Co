@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const NAV = [
@@ -15,6 +16,7 @@ const NAV = [
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   // Frosted, compact header once the page is scrolled.
   useEffect(() => {
@@ -29,10 +31,20 @@ export default function SiteHeader() {
     if (e.target.closest("a")) setOpen(false);
   }
 
+  // On the homepage the logo would link to the page already open, so scroll back to the top instead.
+  function onBrandClick(e) {
+    if (pathname !== "/" || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    setOpen(false);
+    if (window.location.hash) window.history.replaceState(null, "", "/" + window.location.search);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
   return (
     <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <div className="wrap header-inner">
-        <Link className="brand" href="/" rel="home">
+        <Link className="brand" href="/" rel="home" onClick={onBrandClick}>
           <img
             className="brand-logo"
             src="/img/logo-horizontal-white.svg"
