@@ -637,6 +637,11 @@ html:has(.booking-dialog[open]) { overflow: hidden; }
 .hero .wrap > div > :nth-child(4), .hero.page-hero .wrap > :nth-child(4) { animation-delay: .24s; }
 .hero .wrap > div > :nth-child(n+5), .hero.page-hero .wrap > :nth-child(n+5) { animation-delay: .32s; }
 .hero .wrap > .form-card { animation-delay: .2s; }
+/* The headline and lead are the page's largest content (LCP): they slide in but are visible from the
+   first frame, with no delay, so Chrome and Google count them as painted immediately. */
+@keyframes rise-in-solid { from { transform: translateY(24px); } to { transform: none; } }
+.hero h1, .hero .hero-lead { animation: rise-in-solid .9s var(--ease-out) both !important; animation-delay: 0s !important; }
+@media (prefers-reduced-motion: reduce) { .hero h1, .hero .hero-lead { animation: none !important; } }
 
 /* Animated gradient on highlighted headline words */
 .hero h1 em, .cta-band h2 em { background-size: 200% auto; animation: grad-shift 6s ease-in-out infinite alternate; }
