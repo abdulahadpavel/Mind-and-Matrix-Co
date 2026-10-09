@@ -127,7 +127,10 @@ export default function SiteFooter() {
           ))}
         </nav>
         <div className="footer-bottom">
-          <span>&copy; {new Date().getFullYear()} Mind and Matrix Co. All rights reserved.</span>{" "}
+          <span>
+            &copy; {new Date().getFullYear()} Mind and Matrix Co. All rights reserved. ·{" "}
+            <Link href="/privacy-policy">Privacy Policy</Link>
+          </span>{" "}
           <span>100% white label · NDA on request · Your brand, our team</span>
         </div>
       </div>

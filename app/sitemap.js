@@ -30,5 +30,6 @@ export default async function sitemap() {
     page("/dental", 0.7),
     page("/about", 0.6),
     page("/contact", 0.6),
+    page("/privacy-policy", 0.3, "yearly"),
   ];
 }
