@@ -504,8 +504,10 @@ html:has(.booking-dialog[open]) { overflow: hidden; }
 @keyframes hb-grid { to { background-position: 0 64px, 0 64px; } }
 
 /* Light sweep */
-.hb-beam { position: absolute; top: -40%; left: -30%; width: 40%; height: 180%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent); transform: rotate(18deg); animation: hb-beam 11s ease-in-out infinite; }
-@keyframes hb-beam { 0%, 20% { left: -40%; } 70%, 100% { left: 120%; } }
+/* Moved with transform, not left: animating left counts as a layout shift (CLS) on every frame.
+   translateX(400%) of a 40%-wide beam = 160% of the hero, the same sweep as left -40% → 120%. */
+.hb-beam { position: absolute; top: -40%; left: -40%; width: 40%; height: 180%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent); transform: translateX(0) rotate(18deg); animation: hb-beam 11s ease-in-out infinite; will-change: transform; }
+@keyframes hb-beam { 0%, 20% { transform: translateX(0) rotate(18deg); } 70%, 100% { transform: translateX(400%) rotate(18deg); } }
 
 /* Glass ad cards */
 .hb-card {
