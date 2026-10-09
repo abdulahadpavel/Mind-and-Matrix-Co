@@ -1,18 +1,18 @@
 import { notFound } from "next/navigation";
 import ServicePage from "@/components/ServicePage";
 import { DENTAL_PAGES } from "@/lib/dentalPages";
+import { DENTAL_MARKETS } from "@/lib/marketPages";
 import { OG_DEFAULTS } from "@/lib/site";
 
-// Only the slugs listed in lib/dentalPages.js exist; any other /dental/<path> is a 404.
+// Dental service pages (lib/dentalPages.js) and dental market pages (lib/marketPages.js) share /dental/<slug>.
+// Any other /dental/<path> is a 404.
 export const dynamicParams = false;
 
-const getDentalPage = (slug) => {
-  const page = DENTAL_PAGES.find((p) => p.slug === slug);
-  return page ? { ...page, kind: "dental" } : null;
-};
+const PAGES = [...DENTAL_PAGES.map((p) => ({ ...p, kind: "dental" })), ...DENTAL_MARKETS.map((p) => ({ ...p, kind: "dentalMarket" }))];
+const getDentalPage = (slug) => PAGES.find((p) => p.slug === slug) || null;
 
 export function generateStaticParams() {
-  return DENTAL_PAGES.map((p) => ({ slug: p.slug }));
+  return PAGES.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }) {

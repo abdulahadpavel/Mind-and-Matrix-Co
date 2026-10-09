@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CITY, COUNTRY, EMAIL, WHATSAPP, WHATSAPP_URL } from "@/lib/site";
 import { LOCATIONS } from "@/lib/locations";
+import { DENTAL_MARKETS, whiteLabelMarketHref } from "@/lib/marketPages";
 
 // Services without their own page link to the services overview.
 const SERVICES = [
@@ -121,8 +122,16 @@ export default function SiteFooter() {
         <nav className="footer-locations" aria-label="Where we work">
           <span>White label advertising agency for:</span>
           {LOCATIONS.map((l) => (
-            <Link key={l.id} href={`/white-label#${l.id}`}>
+            <Link key={l.id} href={whiteLabelMarketHref(l.id)}>
               {l.name}
+            </Link>
+          ))}
+        </nav>
+        <nav className="footer-locations footer-locations-2" aria-label="Dental marketing locations">
+          <span>Dental marketing in:</span>
+          {DENTAL_MARKETS.map((m) => (
+            <Link key={m.slug} href={`/dental/${m.slug}`}>
+              {m.area.name}
             </Link>
           ))}
         </nav>

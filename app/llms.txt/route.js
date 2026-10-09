@@ -1,6 +1,7 @@
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
 import { DENTAL_PAGES, DENTAL_RESULTS } from "@/lib/dentalPages";
+import { DENTAL_MARKETS, WHITE_LABEL_MARKETS } from "@/lib/marketPages";
 import { safeListPublished } from "@/lib/caseStudies";
 import { CITY, COUNTRY, DEFAULT_DESCRIPTION, EMAIL, SITE_NAME, WHATSAPP, absoluteUrl } from "@/lib/site";
 
@@ -39,10 +40,16 @@ Its specialty is tracking: server-side tracking, Meta Conversions API, Google en
 ${link("White label agency overview", "/white-label", "how the partnership works, pricing models, what stays the agency's")}
 ${WHITE_LABEL_PAGES.map((p) => link(p.navLabel, `/${p.slug}`, p.metaDescription)).join("\n")}
 
+White label by market:
+${WHITE_LABEL_MARKETS.map((p) => link(`White label advertising agency in ${p.area.name}`, `/white-label/${p.slug}`, p.metaDescription)).join("\n")}
+
 ## Dental marketing (for dental practices)
 
 ${link("Dental marketing overview", "/dental", "services, results and FAQ for practice owners")}
 ${DENTAL_PAGES.map((p) => link(p.navLabel, `/dental/${p.slug}`, p.metaDescription)).join("\n")}
+
+Dental marketing by market:
+${DENTAL_MARKETS.map((p) => link(`Dental marketing in ${p.area.name}`, `/dental/${p.slug}`, p.metaDescription)).join("\n")}
 
 Dental results (practice names private at clients' request):
 ${DENTAL_RESULTS.map((r) => `- ${r.title}, ${r.place}: ${r.big} ${r.bigLabel} (${r.stats.map(([l, v]) => `${l}: ${v}`).join("; ")})`).join("\n")}

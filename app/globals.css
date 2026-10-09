@@ -959,4 +959,5 @@ html:has(.booking-dialog[open]) { overflow: hidden; }
 .footer-locations span { color: rgba(255,255,255,.6); font-weight: 600; }
 .footer-locations a { color: rgba(255,255,255,.85); }
 .footer-locations a:hover { color: #fff; }
+.footer-locations-2 { border-top: 0; padding-top: 0; margin-top: -10px; }
 .home-locations { font-size: 15.5px; }

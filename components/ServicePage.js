@@ -5,6 +5,7 @@ import CaseStudyCard from "@/components/CaseStudyCard";
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
 import { DENTAL_PAGES } from "@/lib/dentalPages";
+import { DENTAL_MARKETS, WHITE_LABEL_MARKETS } from "@/lib/marketPages";
 import DentalResults from "@/components/DentalResults";
 import { safeListPublished } from "@/lib/caseStudies";
 import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
@@ -26,16 +27,20 @@ function withLinks(text) {
 // A keyword-focused service landing page: hero + lead form, benefits, what's included,
 // process, long-form article (white-label pages), case studies, FAQ (with FAQ rich-result data)
 // and links to related services. page.kind picks the section it belongs to:
-// "service" (/<slug>), "whiteLabel" (/<slug>, under White Label) or "dental" (/dental/<slug>, for practices).
+// "service" (/<slug>), "whiteLabel" (/<slug>, under White Label), "dental" (/dental/<slug>, for practices),
+// or a market page: "whiteLabelMarket" (/white-label/<slug>) or "dentalMarket" (/dental/<slug>).
 const KINDS = {
   service: { parent: { href: "/services", label: "Services" }, pages: SERVICE_PAGES, base: "" },
   whiteLabel: { parent: { href: "/white-label", label: "White Label" }, pages: WHITE_LABEL_PAGES, base: "" },
   dental: { parent: { href: "/dental", label: "Dental" }, pages: DENTAL_PAGES, base: "/dental" },
+  whiteLabelMarket: { parent: { href: "/white-label", label: "White Label" }, pages: WHITE_LABEL_MARKETS, base: "/white-label" },
+  dentalMarket: { parent: { href: "/dental", label: "Dental" }, pages: DENTAL_MARKETS, base: "/dental" },
 };
 
 export default async function ServicePage({ page }) {
   const kind = KINDS[page.kind] || KINDS.service;
-  const dental = page.kind === "dental";
+  const dental = page.kind === "dental" || page.kind === "dentalMarket";
+  const market = page.kind === "whiteLabelMarket" || page.kind === "dentalMarket";
   const caseStudies = dental ? [] : await safeListPublished({ limit: 3 });
   const related = kind.pages.filter((p) => p.slug !== page.slug);
   const parent = kind.parent;
@@ -54,7 +59,7 @@ export default async function ServicePage({ page }) {
         description: page.metaDescription,
         url,
         provider: { "@id": `${SITE_URL}/#organization`, name: SITE_NAME },
-        areaServed: page.slug.includes("bangladesh") ? "Bangladesh" : "Worldwide",
+        areaServed: page.area || (page.slug.includes("bangladesh") ? "Bangladesh" : "Worldwide"),
         ...(dental ? { audience: { "@type": "BusinessAudience", name: "Dental practices" } } : {}),
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -114,7 +119,9 @@ export default async function ServicePage({ page }) {
             subtitle={
               dental
                 ? "Tell us about your practice. We reply within 1 business day with your free audit."
-                : "Tell us about your business or agency. We reply within 1 business day."
+                : page.kind === "whiteLabel" || page.kind === "whiteLabelMarket"
+                  ? "Tell us about your agency. We reply within 1 business day."
+                  : "Tell us about your business or agency. We reply within 1 business day."
             }
             source={`${dental ? "dental" : "service"}:${page.slug}`.slice(0, 60)}
             submitLabel="Get my free audit"
@@ -241,7 +248,13 @@ export default async function ServicePage({ page }) {
         <div className="wrap">
           <div className="section-head reveal">
             <span className="eyebrow">More services</span>
-            <h2>{dental ? "More ways we grow dental practices" : "Everything your ads need, in one team"}</h2>
+            <h2>
+              {market
+                ? "Other markets we serve"
+                : dental
+                  ? "More ways we grow dental practices"
+                  : "Everything your ads need, in one team"}
+            </h2>
           </div>
           <div className="svc-links">
             {dental ? (

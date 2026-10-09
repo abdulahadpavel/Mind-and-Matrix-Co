@@ -5,6 +5,7 @@ import CaseStudyCard from "@/components/CaseStudyCard";
 import { safeListPublished } from "@/lib/caseStudies";
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
+import { whiteLabelMarketHref } from "@/lib/marketPages";
 import { DEFAULT_DESCRIPTION, OG_DEFAULTS, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
@@ -1036,7 +1037,7 @@ export default async function HomePage() {
               {LOCATIONS.map((l, i) => (
                 <span key={l.id}>
                   {i > 0 && " · "}
-                  <Link href={`/white-label#${l.id}`}>{l.name}</Link>
+                  <Link href={whiteLabelMarketHref(l.id)}>{l.name}</Link>
                 </span>
               ))}
             </p>

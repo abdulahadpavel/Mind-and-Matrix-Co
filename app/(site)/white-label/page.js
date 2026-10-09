@@ -3,6 +3,7 @@ import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
 import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
+import { WHITE_LABEL_MARKETS } from "@/lib/marketPages";
 import { OG_DEFAULTS, SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
@@ -317,9 +318,15 @@ export default function WhiteLabelPage() {
                     <li key={pt}>{pt}</li>
                   ))}
                 </ul>
-                <a className="loc-cta" href="#partner-form">
-                  Get a free proposal for your {loc.name} agency <span aria-hidden="true">→</span>
-                </a>
+                {WHITE_LABEL_MARKETS.some((m) => m.slug === loc.id) ? (
+                  <Link className="loc-cta" href={`/white-label/${loc.id}`}>
+                    White label agency in {loc.name} <span aria-hidden="true">→</span>
+                  </Link>
+                ) : (
+                  <a className="loc-cta" href="#partner-form">
+                    Get a free proposal for your {loc.name} agency <span aria-hidden="true">→</span>
+                  </a>
+                )}
               </article>
             ))}
           </div>

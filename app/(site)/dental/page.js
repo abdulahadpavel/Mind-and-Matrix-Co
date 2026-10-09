@@ -4,6 +4,7 @@ import DentalTabs from "@/components/DentalTabs";
 import DentalResults from "@/components/DentalResults";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import { DENTAL_PAGES } from "@/lib/dentalPages";
+import { DENTAL_MARKETS } from "@/lib/marketPages";
 import { OG_DEFAULTS, SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 const TITLE = "Dental Marketing Agency — Google & Facebook Ads for Dentists";
@@ -50,7 +51,12 @@ export default function DentalPage() {
         url,
         provider: { "@id": `${SITE_URL}/#organization`, name: SITE_NAME },
         audience: { "@type": "BusinessAudience", name: "Dental practices" },
-        areaServed: ["United States", "Canada", "Australia"],
+        areaServed: [
+          { "@type": "Country", name: "United States" },
+          { "@type": "Country", name: "Canada" },
+          { "@type": "Country", name: "Australia" },
+          ...DENTAL_MARKETS.filter((m) => m.area["@type"] === "State").map((m) => m.area),
+        ],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Dental marketing services",
@@ -215,6 +221,26 @@ export default function DentalPage() {
         </div>
       </section>
       <section className="section section-soft">
+        <div className="wrap">
+          <div className="section-head reveal">
+            <span className="eyebrow">Where we work</span>
+            <h2>Dental marketing in the US and Canada</h2>
+            <p>Local targeting, local advertising rules and local proof for each market we serve.</p>
+          </div>
+          <div className="grid g4">
+            {DENTAL_MARKETS.map((m) => (
+              <Link key={m.slug} href={`/dental/${m.slug}`} className="card svc-card reveal">
+                <h3>{m.area.name}</h3>
+                <p>{m.checks[0]}</p>
+                <span className="svc-card-more">
+                  Dental marketing in {m.area.name} <span aria-hidden="true">→</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
         <div className="wrap">
           <div className="section-head reveal">
             <span className="eyebrow">FAQ</span>
