@@ -8,7 +8,7 @@ const NAV = [
   { href: "/white-label", label: "White Label" },
   { href: "/services", label: "Services" },
   { href: "/case-studies", label: "Case Studies" },
-  { href: "/dental", label: "Dental" },
+  { href: "/dental", label: "For Dentists" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ];

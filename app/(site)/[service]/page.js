@@ -6,7 +6,7 @@ import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
 // Only the slugs listed in lib/servicePages.js and lib/whiteLabelPages.js exist; any other path is a 404.
 export const dynamicParams = false;
 
-const PAGES = [...SERVICE_PAGES.map((p) => ({ ...p, whiteLabel: false })), ...WHITE_LABEL_PAGES.map((p) => ({ ...p, whiteLabel: true }))];
+const PAGES = [...SERVICE_PAGES.map((p) => ({ ...p, kind: "service" })), ...WHITE_LABEL_PAGES.map((p) => ({ ...p, kind: "whiteLabel" }))];
 const getServicePage = (slug) => PAGES.find((p) => p.slug === slug) || null;
 
 export function generateStaticParams() {

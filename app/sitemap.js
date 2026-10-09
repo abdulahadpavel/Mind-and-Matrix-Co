@@ -1,6 +1,7 @@
 import { SITE_URL } from "@/lib/site";
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
+import { DENTAL_PAGES } from "@/lib/dentalPages";
 import { safeListPublished } from "@/lib/caseStudies";
 
 // Rebuilt when case studies change (see revalidateCaseStudyPages) and at most hourly.
@@ -29,7 +30,8 @@ export default async function sitemap() {
       changeFrequency: "monthly",
       priority: 0.7,
     })),
-    page("/dental", 0.7),
+    page("/dental", 0.9),
+    ...DENTAL_PAGES.map((p) => page(`/dental/${p.slug}`, 0.8)),
     page("/about", 0.6),
     page("/contact", 0.6),
     page("/privacy-policy", 0.3, "yearly"),

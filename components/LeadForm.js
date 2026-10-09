@@ -19,6 +19,18 @@ export const SERVICES = [
 
 const SPEND = ["Under $10k", "$10k – $50k", "$50k – $150k", "$150k+"];
 
+// variant="dental": the form speaks to practice owners instead of agencies.
+const DENTAL_SERVICES = [
+  "New patients",
+  "Dental implants",
+  "Invisalign / clear aligners",
+  "Emergency dental",
+  "Cosmetic & whitening",
+  "Google Business Profile",
+];
+const DENTAL_BUDGET = ["Under $2k", "$2k – $5k", "$5k – $15k", "$15k+"];
+const DENTAL_LOCATIONS = ["1", "2–5", "6+"];
+
 // UTM / click IDs are kept for the browser session so they survive page changes.
 const ATTR_KEYS = ["utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"];
 
@@ -54,6 +66,7 @@ export default function LeadForm({
   const [booking, setBooking] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const full = variant === "full";
+  const dental = variant === "dental";
 
   useEffect(() => {
     attribution.current = readAttribution();
@@ -71,7 +84,10 @@ export default function LeadForm({
     const email = String(fd.get("email") || "").trim();
     const company = String(fd.get("company") || "").trim();
     if (!name || !company || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setStatus({ type: "err", text: "Please add your name, a valid email and your company name." });
+      setStatus({
+        type: "err",
+        text: `Please add your name, a valid email and your ${dental ? "practice" : "company"} name.`,
+      });
       return;
     }
 
@@ -81,6 +97,13 @@ export default function LeadForm({
       payload[k] = typeof v === "string" ? v.trim() : v;
     });
     payload.services = fd.getAll("services").join(", ");
+    // City and number of locations have no column of their own, so they ride in the message.
+    if (dental) {
+      const extra = [payload.city && `City: ${payload.city}`, payload.locations && `Locations: ${payload.locations}`];
+      payload.message = [extra.filter(Boolean).join(" · "), payload.message].filter(Boolean).join("\n");
+      delete payload.city;
+      delete payload.locations;
+    }
     payload.page_url = window.location.href;
     payload.referrer = document.referrer || "";
     Object.assign(payload, attribution.current);
@@ -184,21 +207,21 @@ export default function LeadForm({
               name="email"
               autoComplete="email"
               required
-              placeholder="jane@agency.com"
+              placeholder={dental ? "jane@yourpractice.com" : "jane@agency.com"}
             />
           </div>
         </div>
 
         <div className="row">
           <div className="field">
-            <label htmlFor={f("company")}>Agency / company *</label>
+            <label htmlFor={f("company")}>{dental ? "Practice name *" : "Agency / company *"}</label>
             <input
               type="text"
               id={f("company")}
               name="company"
               autoComplete="organization"
               required
-              placeholder="Acme Marketing"
+              placeholder={dental ? "Bright Smile Dental" : "Acme Marketing"}
             />
           </div>
           <div className="field">
@@ -207,51 +230,99 @@ export default function LeadForm({
           </div>
         </div>
 
-        {full ? (
-          <div className="row">
-            <div className="field">
-              <label htmlFor={f("site")}>Website</label>
-              <input type="url" id={f("site")} name="website" placeholder="https://" />
+        {dental ? (
+          <>
+            <input type="hidden" name="partner_type" value="Dental practice" />
+            <div className="row">
+              <div className="field">
+                <label htmlFor={f("city")}>City</label>
+                <input type="text" id={f("city")} name="city" autoComplete="address-level2" placeholder="Austin, TX" />
+              </div>
+              <div className="field">
+                <label htmlFor={f("loc")}>Number of locations</label>
+                <select id={f("loc")} name="locations" defaultValue="">
+                  <option value="">Select</option>
+                  {DENTAL_LOCATIONS.map((l) => (
+                    <option key={l}>{l}</option>
+                  ))}
+                </select>
+              </div>
             </div>
             <div className="field">
-              <label htmlFor={f("type")}>You are a…</label>
-              <select id={f("type")} name="partner_type">
-                <option value="Agency (white label)">Agency — white label partner</option>
-                <option value="Dental practice">Dental practice / DSO</option>
-                <option value="Other business">Other business</option>
+              <label htmlFor={f("spend")}>Monthly ad budget</label>
+              <select id={f("spend")} name="ad_spend" defaultValue="">
+                <option value="">Select a range</option>
+                {DENTAL_BUDGET.map((b) => (
+                  <option key={b}>{b}</option>
+                ))}
               </select>
             </div>
-          </div>
+            <div className="field">
+              <span
+                className="label"
+                style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "var(--ink)", marginBottom: "8px" }}
+              >
+                What do you want more of?
+              </span>
+              <div className="chips">
+                {DENTAL_SERVICES.map((s) => (
+                  <label className="chip" key={s}>
+                    <input type="checkbox" name="services" value={s} />
+                    <span>{s}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </>
         ) : (
-          <input type="hidden" name="partner_type" value="Agency (white label)" />
+          <>
+            {full ? (
+              <div className="row">
+                <div className="field">
+                  <label htmlFor={f("site")}>Website</label>
+                  <input type="url" id={f("site")} name="website" placeholder="https://" />
+                </div>
+                <div className="field">
+                  <label htmlFor={f("type")}>You are a…</label>
+                  <select id={f("type")} name="partner_type">
+                    <option value="Agency (white label)">Agency — white label partner</option>
+                    <option value="Dental practice">Dental practice / DSO</option>
+                    <option value="Other business">Other business</option>
+                  </select>
+                </div>
+              </div>
+            ) : (
+              <input type="hidden" name="partner_type" value="Agency (white label)" />
+            )}
+
+            <div className="field">
+              <label htmlFor={f("spend")}>Monthly ad spend you manage</label>
+              <select id={f("spend")} name="ad_spend" defaultValue="">
+                <option value="">Select a range</option>
+                {SPEND.map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="field">
+              <span
+                className="label"
+                style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "var(--ink)", marginBottom: "8px" }}
+              >
+                Services you need
+              </span>
+              <div className="chips">
+                {SERVICES.map((s) => (
+                  <label className="chip" key={s}>
+                    <input type="checkbox" name="services" value={s} />
+                    <span>{s}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </>
         )}
-
-        <div className="field">
-          <label htmlFor={f("spend")}>Monthly ad spend you manage</label>
-          <select id={f("spend")} name="ad_spend" defaultValue="">
-            <option value="">Select a range</option>
-            {SPEND.map((s) => (
-              <option key={s}>{s}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className="field">
-          <span
-            className="label"
-            style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "var(--ink)", marginBottom: "8px" }}
-          >
-            Services you need
-          </span>
-          <div className="chips">
-            {SERVICES.map((s) => (
-              <label className="chip" key={s}>
-                <input type="checkbox" name="services" value={s} />
-                <span>{s}</span>
-              </label>
-            ))}
-          </div>
-        </div>
 
         {full && (
           <div className="field">
@@ -267,7 +338,9 @@ export default function LeadForm({
         <button type="submit" className="btn btn-primary btn-block" disabled={sending}>
           {sending ? "Sending…" : submitLabel}
         </button>
-        <p className="form-note">We sign an NDA on request. Your details are never shared.</p>
+        <p className="form-note">
+          {dental ? "No long-term contract. Your details are never shared." : "We sign an NDA on request. Your details are never shared."}
+        </p>
         <div className={`form-msg ${status.type}`} role="status" aria-live="polite">
           {status.text}
         </div>
