@@ -4,11 +4,11 @@ import { LOCATIONS } from "@/lib/locations";
 
 // Services without their own page link to the services overview.
 const SERVICES = [
-  { href: "/services", label: "PPC & Media Buying" },
+  { href: "/white-label-ppc", label: "PPC & Media Buying" },
   { href: "/google-ads-agency", label: "Google Ads" },
   { href: "/facebook-ads-agency", label: "Meta Ads" },
-  { href: "/services", label: "Microsoft Ads" },
-  { href: "/services", label: "LinkedIn Ads" },
+  { href: "/white-label-microsoft-ads", label: "Microsoft Ads" },
+  { href: "/white-label-linkedin-ads", label: "LinkedIn Ads" },
   { href: "/services", label: "TikTok Ads" },
   { href: "/services", label: "ChatGPT Ads" },
   { href: "/services", label: "Creatives & UGC" },

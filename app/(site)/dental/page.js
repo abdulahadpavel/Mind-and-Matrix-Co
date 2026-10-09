@@ -7,6 +7,7 @@ export const metadata = {
   description:
     "Dental marketing that brings new patients: Google Ads, Facebook & Instagram ads, Google Business Profile and YouTube for dental practices — delivered directly or white label for agencies.",
   alternates: { canonical: "/dental" },
+  openGraph: { title: "Dental Marketing Agency — Google Ads & Facebook Ads for Dentists | Mind and Matrix Co.", description: "Dental marketing that brings new patients: Google Ads, Facebook & Instagram ads, Google Business Profile and YouTube for dental practices — delivered directly or white label for agencies.", url: "/dental" },
 };
 
 export default function DentalPage() {

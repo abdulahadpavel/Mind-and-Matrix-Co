@@ -2,10 +2,11 @@ import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
+import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
 import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
-  title: "Best White Label Advertising Agency — Canada, Australia, California, Texas & Florida",
+  title: { absolute: "Best White Label Advertising Agency | Mind and Matrix Co." },
   description:
     "Mind and Matrix Co. is a white label advertising agency for agencies in Canada, Australia, California, Texas and Florida. Google Ads, Facebook & Instagram ads, Microsoft Ads and tracking — run under your brand.",
   keywords: [
@@ -24,7 +25,7 @@ export const metadata = {
   ],
   alternates: { canonical: "/white-label" },
   openGraph: {
-    title: "Best White Label Advertising Agency — Canada, Australia, California, Texas & Florida",
+    title: "Best White Label Advertising Agency | Mind and Matrix Co.",
     description:
       "White label Google Ads, Facebook ads, Microsoft Ads and tracking for agencies in Canada, Australia, California, Texas and Florida.",
     url: "/white-label",
@@ -171,6 +172,24 @@ export default function WhiteLabelPage() {
                 <h3>{title}</h3>
                 <p>{text}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head reveal">
+            <span className="eyebrow">By channel</span>
+            <h2>White label services by channel</h2>
+            <p>See how we run each channel for your clients, what’s included and common questions.</p>
+          </div>
+          <div className="svc-links">
+            {WHITE_LABEL_PAGES.map((p) => (
+              <Link key={p.slug} href={`/${p.slug}`} className="svc-link reveal">
+                <b>{p.navLabel}</b>
+                <span>{p.metaTitle.split(" — ")[0]}</span>
+              </Link>
             ))}
           </div>
         </div>

@@ -8,6 +8,7 @@ export const metadata = {
   description:
     "Real paid media results: revenue, ROAS, bookings and leads from Google Ads, YouTube, Performance Max and Meta campaigns we have run.",
   alternates: { canonical: "/case-studies" },
+  openGraph: { title: "Case Studies | Mind and Matrix Co.", description: "Real paid media results: revenue, ROAS, bookings and leads from Google Ads, YouTube, Performance Max and Meta campaigns we have run.", url: "/case-studies" },
 };
 
 export default async function CaseStudiesPage() {

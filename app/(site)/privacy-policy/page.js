@@ -10,6 +10,7 @@ export const metadata = {
   description:
     "How Mind and Matrix Co. collects, uses and protects personal information from visitors to mindandmatrixco.com, people who contact us and our agency partners.",
   alternates: { canonical: "/privacy-policy" },
+  openGraph: { title: "Privacy Policy | Mind and Matrix Co.", description: "How Mind and Matrix Co. collects, uses and protects personal information from visitors to mindandmatrixco.com, people who contact us and our agency partners.", url: "/privacy-policy" },
 };
 
 export default function PrivacyPolicyPage() {

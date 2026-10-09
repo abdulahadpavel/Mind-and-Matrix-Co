@@ -1,12 +1,16 @@
 import { notFound } from "next/navigation";
 import ServicePage from "@/components/ServicePage";
-import { SERVICE_PAGES, getServicePage } from "@/lib/servicePages";
+import { SERVICE_PAGES } from "@/lib/servicePages";
+import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
 
-// Only the service slugs listed in lib/servicePages.js exist; any other path is a 404.
+// Only the slugs listed in lib/servicePages.js and lib/whiteLabelPages.js exist; any other path is a 404.
 export const dynamicParams = false;
 
+const PAGES = [...SERVICE_PAGES.map((p) => ({ ...p, whiteLabel: false })), ...WHITE_LABEL_PAGES.map((p) => ({ ...p, whiteLabel: true }))];
+const getServicePage = (slug) => PAGES.find((p) => p.slug === slug) || null;
+
 export function generateStaticParams() {
-  return SERVICE_PAGES.map((p) => ({ service: p.slug }));
+  return PAGES.map((p) => ({ service: p.slug }));
 }
 
 export async function generateMetadata({ params }) {

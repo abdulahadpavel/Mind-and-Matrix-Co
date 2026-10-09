@@ -23,7 +23,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Mind and Matrix Co. | White Label Digital Advertising Agency",
+    default: "White Label PPC & Advertising Agency | Mind and Matrix Co.",
     template: "%s | Mind and Matrix Co.",
   },
   description: DEFAULT_DESCRIPTION,
@@ -51,7 +51,7 @@ export const metadata = {
     siteName: SITE_NAME,
     locale: "en_US",
     url: "/",
-    title: "Mind and Matrix Co. | White Label Digital Advertising Agency",
+    title: "White Label PPC & Advertising Agency | Mind and Matrix Co.",
     description: DEFAULT_DESCRIPTION,
   },
   twitter: { card: "summary_large_image" },
@@ -90,11 +90,27 @@ const ORGANIZATION = {
         { "@type": "State", name: "Florida" },
       ],
       founder: [
-        { "@type": "Person", name: "Abdul Ahad Pavel", jobTitle: "Co-Founder · AdTech, CRO & Business System Engineer" },
-        { "@type": "Person", name: "Partho Sharothi Paul" },
+        {
+          "@type": "Person",
+          name: "Abdul Ahad Pavel",
+          jobTitle: "Co-Founder · AdTech, CRO & Business System Engineer",
+          url: absoluteUrl("/about"),
+          sameAs: ["https://www.linkedin.com/in/abdulahadpavel/"],
+        },
+        {
+          "@type": "Person",
+          name: "Partho Sharothi Paul",
+          jobTitle: "Co-Founder",
+          url: absoluteUrl("/about"),
+          sameAs: ["https://www.linkedin.com/in/paulparthosharothi/"],
+        },
       ],
       knowsAbout: [
         "White label advertising",
+        "White label PPC",
+        "Microsoft Advertising",
+        "LinkedIn Ads",
+        "Server-side tracking",
         "White label digital marketing",
         "Google Ads management",
         "Facebook and Instagram advertising",

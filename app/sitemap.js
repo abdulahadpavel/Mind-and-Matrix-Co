@@ -1,5 +1,6 @@
 import { SITE_URL } from "@/lib/site";
 import { SERVICE_PAGES } from "@/lib/servicePages";
+import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
 import { safeListPublished } from "@/lib/caseStudies";
 
 // Rebuilt when case studies change (see revalidateCaseStudyPages) and at most hourly.
@@ -18,6 +19,7 @@ export default async function sitemap() {
   return [
     page("/", 1, "weekly"),
     page("/white-label", 0.9),
+    ...WHITE_LABEL_PAGES.map((p) => page(`/${p.slug}`, 0.9)),
     page("/services", 0.9),
     ...SERVICE_PAGES.map((s) => page(`/${s.slug}`, 0.9)),
     page("/case-studies", 0.8, "weekly"),

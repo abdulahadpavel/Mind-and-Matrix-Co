@@ -3,14 +3,31 @@ import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import { SERVICE_PAGES } from "@/lib/servicePages";
+import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
 import { safeListPublished } from "@/lib/caseStudies";
 import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
+// Turns "[text](/path)" in article copy into internal links.
+function withLinks(text) {
+  return text.split(/(\[[^\]]+\]\(\/[^)]*\))/).map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\((\/[^)]*)\)$/);
+    return m ? (
+      <Link key={i} href={m[2]}>
+        {m[1]}
+      </Link>
+    ) : (
+      part
+    );
+  });
+}
+
 // A keyword-focused service landing page: hero + lead form, benefits, what's included,
-// process, case studies, FAQ (with FAQ rich-result data) and links to related services.
+// process, long-form article (white-label pages), case studies, FAQ (with FAQ rich-result data)
+// and links to related services. White-label pages sit under /white-label in the breadcrumb.
 export default async function ServicePage({ page }) {
   const caseStudies = await safeListPublished({ limit: 3 });
-  const related = SERVICE_PAGES.filter((p) => p.slug !== page.slug);
+  const related = (page.whiteLabel ? WHITE_LABEL_PAGES : SERVICE_PAGES).filter((p) => p.slug !== page.slug);
+  const parent = page.whiteLabel ? { href: "/white-label", label: "White Label" } : { href: "/services", label: "Services" };
   const formId = `${page.slug}-form`;
   const url = absoluteUrl(`/${page.slug}`);
 
@@ -45,7 +62,7 @@ export default async function ServicePage({ page }) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-          { "@type": "ListItem", position: 2, name: "Services", item: absoluteUrl("/services") },
+          { "@type": "ListItem", position: 2, name: parent.label, item: absoluteUrl(parent.href) },
           { "@type": "ListItem", position: 3, name: page.navLabel, item: url },
         ],
       },
@@ -63,7 +80,7 @@ export default async function ServicePage({ page }) {
             <nav className="cs-crumbs" aria-label="Breadcrumb">
               <Link href="/">Home</Link>
               <span aria-hidden="true">/</span>
-              <Link href="/services">Services</Link>
+              <Link href={parent.href}>{parent.label}</Link>
               <span aria-hidden="true">/</span>
               <span>{page.navLabel}</span>
             </nav>
@@ -138,6 +155,23 @@ export default async function ServicePage({ page }) {
         </div>
       </section>
 
+      {page.article && (
+        <section className="section">
+          <div className="wrap">
+            <article className="legal svc-article reveal">
+              {page.article.map(([heading, paras]) => (
+                <div key={heading}>
+                  <h2>{heading}</h2>
+                  {paras.map((t) => (
+                    <p key={t.slice(0, 40)}>{withLinks(t)}</p>
+                  ))}
+                </div>
+              ))}
+            </article>
+          </div>
+        </section>
+      )}
+
       {caseStudies.length > 0 && (
         <section className="section">
           <div className="wrap">
@@ -179,10 +213,17 @@ export default async function ServicePage({ page }) {
             <h2>Everything your ads need, in one team</h2>
           </div>
           <div className="svc-links">
-            <Link href="/white-label" className="svc-link reveal">
-              <b>White label agency services</b>
-              <span>Resell our work under your agency’s brand</span>
-            </Link>
+            {page.whiteLabel ? (
+              <Link href="/white-label" className="svc-link reveal">
+                <b>White label agency overview</b>
+                <span>How our white-label partnership works</span>
+              </Link>
+            ) : (
+              <Link href="/white-label" className="svc-link reveal">
+                <b>White label agency services</b>
+                <span>Resell our work under your agency’s brand</span>
+              </Link>
+            )}
             {related.map((p) => (
               <Link key={p.slug} href={`/${p.slug}`} className="svc-link reveal">
                 <b>{p.navLabel}</b>

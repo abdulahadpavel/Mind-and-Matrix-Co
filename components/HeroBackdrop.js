@@ -1,4 +1,6 @@
 // Decorative, animated advertising scene behind every page hero (pure CSS animation, no JS).
+// Its words are drawn by CSS from data-t (see .hb [data-t]::after), so they stay out of the page text
+// that search engines read — otherwise "best dentist near me" would come before every page's H1.
 export default function HeroBackdrop() {
   return (
     <div className="hb" aria-hidden="true">
@@ -12,10 +14,10 @@ export default function HeroBackdrop() {
       <div className="hb-card hb-search">
         <div className="hb-search-bar">
           <i className="hb-g" />
-          <span>best dentist near me</span>
+          <span data-t="best dentist near me" />
         </div>
-        <small>Sponsored · yourclient.com</small>
-        <b>Book Your Visit Today — New Patients Welcome</b>
+        <small data-t="Sponsored · yourclient.com" />
+        <b data-t="Book Your Visit Today — New Patients Welcome" />
         <span className="hb-line" />
         <span className="hb-line hb-line-short" />
       </div>
@@ -25,14 +27,14 @@ export default function HeroBackdrop() {
         <div className="hb-meta-head">
           <i />
           <div>
-            <b>Your Client</b>
-            <small>Sponsored</small>
+            <b data-t="Your Client" />
+            <small data-t="Sponsored" />
           </div>
         </div>
         <div className="hb-meta-img" />
         <div className="hb-meta-foot">
-          <span>Limited offer</span>
-          <em>Learn more</em>
+          <span data-t="Limited offer" />
+          <em data-t="Learn more" />
         </div>
         <span className="hb-cursor" />
         <span className="hb-ripple" />
@@ -41,8 +43,8 @@ export default function HeroBackdrop() {
       {/* Leads chart that draws itself */}
       <div className="hb-card hb-chart">
         <div className="hb-chart-head">
-          <small>Leads</small>
-          <b>+38%</b>
+          <small data-t="Leads" />
+          <b data-t="+38%" />
         </div>
         <svg viewBox="0 0 200 70" preserveAspectRatio="none">
           <defs>
@@ -62,14 +64,14 @@ export default function HeroBackdrop() {
           <span className="hb-play" />
           <span className="hb-video-bar"><i /></span>
         </div>
-        <small>Ad · 0:15</small>
+        <small data-t="Ad · 0:15" />
       </div>
 
       {/* Metric chips */}
-      <span className="hb-chip hb-chip-1"><i className="up" />ROAS 4.6x</span>
-      <span className="hb-chip hb-chip-2"><i className="down" />CPL −22%</span>
-      <span className="hb-chip hb-chip-3"><i className="up" />+214 leads</span>
-      <span className="hb-chip hb-chip-4"><i className="up" />CTR 6.8%</span>
+      <span className="hb-chip hb-chip-1" data-t="ROAS 4.6x"><i className="up" /></span>
+      <span className="hb-chip hb-chip-2" data-t="CPL −22%"><i className="down" /></span>
+      <span className="hb-chip hb-chip-3" data-t="+214 leads"><i className="up" /></span>
+      <span className="hb-chip hb-chip-4" data-t="CTR 6.8%"><i className="up" /></span>
 
       {/* Rising signal particles */}
       {Array.from({ length: 12 }, (_, i) => (

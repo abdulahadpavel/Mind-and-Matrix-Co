@@ -8,9 +8,10 @@ import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
 import { DEFAULT_DESCRIPTION, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
-  title: { absolute: "Mind and Matrix Co. | White Label Digital Advertising Agency" },
+  title: { absolute: "White Label PPC & Advertising Agency | Mind and Matrix Co." },
   description: DEFAULT_DESCRIPTION,
   alternates: { canonical: "/" },
+  openGraph: { title: "White Label PPC & Advertising Agency | Mind and Matrix Co.", description: DEFAULT_DESCRIPTION, url: "/" },
 };
 
 const FAQS = [
