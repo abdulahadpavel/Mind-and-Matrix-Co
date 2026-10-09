@@ -48,8 +48,8 @@ export default function SiteHeader() {
           <img
             className="brand-logo"
             src="/img/logo-horizontal-white.svg"
-            alt="Mind and Matrix Co."
-            width="223"
+            alt="MindandMatrix Co."
+            width="225"
             height="36"
           />
         </Link>

@@ -1,8 +1,8 @@
 // Web app manifest: name and icons used by browsers, Android and search engines.
 export default function manifest() {
   return {
-    name: "Mind and Matrix Co.",
-    short_name: "Mind and Matrix",
+    name: "MindandMatrix Co.",
+    short_name: "MindandMatrix",
     description: "White label digital advertising agency — Google Ads, Facebook ads, conversion tracking and web analytics.",
     start_url: "/",
     display: "standalone",

@@ -3,15 +3,15 @@ import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
-import { absoluteUrl, jsonLdScript } from "@/lib/site";
+import { OG_DEFAULTS, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
   title: "Digital Advertising Agency Services",
   description:
-    "Digital advertising agency services from Mind and Matrix Co.: Google Ads, Facebook & Instagram ads, conversion tracking, web analytics and white label paid media for agencies.",
+    "Digital advertising agency services from MindandMatrix Co.: Google Ads, Facebook & Instagram ads, conversion tracking, web analytics and white label paid media for agencies.",
   keywords: ["digital advertising agency", "best digital marketing agency", "best ad agency", "paid media agency", "performance marketing agency"],
   alternates: { canonical: "/services" },
-  openGraph: { title: "Digital Advertising Agency Services | Mind and Matrix Co.", description: "Digital advertising agency services from Mind and Matrix Co.: Google Ads, Facebook & Instagram ads, conversion tracking, web analytics and white label paid media for agencies.", url: "/services" },
+  openGraph: { ...OG_DEFAULTS, title: "Digital Advertising Agency Services | MindandMatrix Co.", description: "Digital advertising agency services from MindandMatrix Co.: Google Ads, Facebook & Instagram ads, conversion tracking, web analytics and white label paid media for agencies.", url: "/services" },
 };
 
 const ALL = [
@@ -45,7 +45,7 @@ export default function ServicesPage() {
               A digital advertising agency for <em>brands and agencies.</em>
             </h1>
             <p className="hero-lead">
-              Mind and Matrix Co. plans, runs and measures paid media from start to finish: Google Ads, Facebook and
+              MindandMatrix Co. plans, runs and measures paid media from start to finish: Google Ads, Facebook and
               Instagram ads, creatives, landing pages, conversion tracking and analytics. Hire us directly or resell our
               work under your own brand.
             </p>

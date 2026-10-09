@@ -1,6 +1,6 @@
 import Link from "next/link";
 import HeroBackdrop from "@/components/HeroBackdrop";
-import { CITY, COUNTRY, EMAIL, SITE_NAME, SITE_URL, WHATSAPP, WHATSAPP_URL } from "@/lib/site";
+import { CITY, COUNTRY, EMAIL, OG_DEFAULTS, SITE_NAME, SITE_URL, WHATSAPP, WHATSAPP_URL } from "@/lib/site";
 
 // Update this date whenever the policy text changes.
 const LAST_UPDATED = "October 10, 2026";
@@ -8,9 +8,9 @@ const LAST_UPDATED = "October 10, 2026";
 export const metadata = {
   title: "Privacy Policy",
   description:
-    "How Mind and Matrix Co. collects, uses and protects personal information from visitors to mindandmatrixco.com, people who contact us and our agency partners.",
+    "How MindandMatrix Co. collects, uses and protects personal information from visitors to mindandmatrixco.com, people who contact us and our agency partners.",
   alternates: { canonical: "/privacy-policy" },
-  openGraph: { title: "Privacy Policy | Mind and Matrix Co.", description: "How Mind and Matrix Co. collects, uses and protects personal information from visitors to mindandmatrixco.com, people who contact us and our agency partners.", url: "/privacy-policy" },
+  openGraph: { ...OG_DEFAULTS, title: "Privacy Policy | MindandMatrix Co.", description: "How MindandMatrix Co. collects, uses and protects personal information from visitors to mindandmatrixco.com, people who contact us and our agency partners.", url: "/privacy-policy" },
 };
 
 export default function PrivacyPolicyPage() {

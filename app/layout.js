@@ -23,12 +23,13 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "White Label PPC & Advertising Agency | Mind and Matrix Co.",
-    template: "%s | Mind and Matrix Co.",
+    default: "White Label PPC & Advertising Agency | MindandMatrix Co.",
+    template: "%s | MindandMatrix Co.",
   },
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
+    "MindandMatrix Co.",
     "Mind and Matrix",
     "mindandmatrix",
     "mindandmatrixco",
@@ -51,7 +52,7 @@ export const metadata = {
     siteName: SITE_NAME,
     locale: "en_US",
     url: "/",
-    title: "White Label PPC & Advertising Agency | Mind and Matrix Co.",
+    title: "White Label PPC & Advertising Agency | MindandMatrix Co.",
     description: DEFAULT_DESCRIPTION,
   },
   twitter: { card: "summary_large_image" },

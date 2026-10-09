@@ -46,7 +46,7 @@ export default function AdminNav({ admin, newCount }) {
     <aside className={open ? "adm-side is-open" : "adm-side"}>
       <div className="adm-side-top">
         <Link href="/admin" className="adm-side-brand">
-          <img src="/img/logo-horizontal-white.svg" alt="Mind and Matrix Co." width="160" height="26" />
+          <img src="/img/logo-horizontal-white.svg" alt="MindandMatrix Co." width="162" height="26" />
         </Link>
         <button className="adm-side-toggle" aria-expanded={open} aria-controls="adm-nav" onClick={() => setOpen((v) => !v)}>
           <span className="screen-reader-text">Menu</span>

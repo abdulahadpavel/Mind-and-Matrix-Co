@@ -4,7 +4,7 @@ import DentalTabs from "@/components/DentalTabs";
 import DentalResults from "@/components/DentalResults";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import { DENTAL_PAGES } from "@/lib/dentalPages";
-import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
+import { OG_DEFAULTS, SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 const TITLE = "Dental Marketing Agency — Google & Facebook Ads for Dentists";
 const DESCRIPTION =
@@ -22,7 +22,7 @@ export const metadata = {
     "how to get more dental patients",
   ],
   alternates: { canonical: "/dental" },
-  openGraph: { title: `${TITLE} | ${SITE_NAME}`, description: DESCRIPTION, url: "/dental" },
+  openGraph: { ...OG_DEFAULTS, title: `${TITLE} | ${SITE_NAME}`, description: DESCRIPTION, url: "/dental" },
 };
 
 const FAQS = [

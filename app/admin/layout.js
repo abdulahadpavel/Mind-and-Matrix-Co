@@ -1,7 +1,7 @@
 import "./admin.css";
 
 export const metadata = {
-  title: { default: "Admin", template: "%s · Admin · Mind and Matrix Co." },
+  title: { default: "Admin", template: "%s · Admin · MindandMatrix Co." },
   robots: { index: false, follow: false },
 };
 

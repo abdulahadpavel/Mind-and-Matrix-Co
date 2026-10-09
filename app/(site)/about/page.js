@@ -1,12 +1,13 @@
 import Link from "next/link";
 import HeroBackdrop from "@/components/HeroBackdrop";
+import { OG_DEFAULTS } from "@/lib/site";
 
 export const metadata = {
   title: "About Us — Founders & Team",
   description:
-    "Meet Mind and Matrix Co. (mindandmatrixco), a digital advertising agency in Dhaka, Bangladesh founded by Abdul Ahad Pavel and Partho Sharothi Paul. Paid media, creatives, tracking and CRM for agencies and brands.",
+    "Meet MindandMatrix Co. (mindandmatrixco), a digital advertising agency in Dhaka, Bangladesh founded by Abdul Ahad Pavel and Partho Sharothi Paul. Paid media, creatives, tracking and CRM for agencies and brands.",
   alternates: { canonical: "/about" },
-  openGraph: { title: "About Us — Founders & Team | Mind and Matrix Co.", description: "Meet Mind and Matrix Co. (mindandmatrixco), a digital advertising agency in Dhaka, Bangladesh founded by Abdul Ahad Pavel and Partho Sharothi Paul. Paid media, creatives, tracking and CRM for agencies and brands.", url: "/about" },
+  openGraph: { ...OG_DEFAULTS, title: "About Us — Founders & Team | MindandMatrix Co.", description: "Meet MindandMatrix Co. (mindandmatrixco), a digital advertising agency in Dhaka, Bangladesh founded by Abdul Ahad Pavel and Partho Sharothi Paul. Paid media, creatives, tracking and CRM for agencies and brands.", url: "/about" },
 };
 
 export default function AboutPage() {
@@ -22,7 +23,7 @@ export default function AboutPage() {
             The paid media team <em>behind growing agencies</em>
           </h1>
           <p className="hero-lead">
-            Mind and Matrix Co. is a performance marketing studio of ad buyers, creatives, funnel builders and
+            MindandMatrix Co. is a performance marketing studio of ad buyers, creatives, funnel builders and
             tracking specialists. We turn website visitors into paying customers — for the agencies we partner
             with, under their name.
           </p>

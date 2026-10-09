@@ -28,8 +28,8 @@ export default function SiteFooter() {
               <img
                 className="brand-logo"
                 src="/img/logo-horizontal-white.svg"
-                alt="Mind and Matrix Co."
-                width="223"
+                alt="MindandMatrix Co."
+                width="225"
                 height="36"
                 loading="lazy"
               />
@@ -128,7 +128,7 @@ export default function SiteFooter() {
         </nav>
         <div className="footer-bottom">
           <span>
-            &copy; {new Date().getFullYear()} Mind and Matrix Co. All rights reserved. ·{" "}
+            &copy; {new Date().getFullYear()} MindandMatrix Co. All rights reserved. ·{" "}
             <Link href="/privacy-policy">Privacy Policy</Link>
           </span>{" "}
           <span>100% white label · NDA on request · Your brand, our team</span>

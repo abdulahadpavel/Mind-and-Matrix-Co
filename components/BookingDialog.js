@@ -34,7 +34,7 @@ export default function BookingDialog({ url, name, onClose }) {
         </header>
         <div className="booking-frame">
           {!loaded && <div className="booking-loading">Loading calendar…</div>}
-          <iframe src={url} title="Book a meeting with Mind and Matrix Co." onLoad={() => setLoaded(true)} />
+          <iframe src={url} title="Book a meeting with MindandMatrix Co." onLoad={() => setLoaded(true)} />
         </div>
         <footer className="booking-foot">
           <span>Not ready yet? You can close this — we’ll still reply within 1 business day.</span>

@@ -2,13 +2,14 @@ import LeadForm from "@/components/LeadForm";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import CaseStudyCarousel from "@/components/CaseStudyCarousel";
 import { safeListPublished } from "@/lib/caseStudies";
+import { OG_DEFAULTS } from "@/lib/site";
 
 export const metadata = {
   title: "Case Studies",
   description:
     "Real paid media results: revenue, ROAS, bookings and leads from Google Ads, YouTube, Performance Max and Meta campaigns we have run.",
   alternates: { canonical: "/case-studies" },
-  openGraph: { title: "Case Studies | Mind and Matrix Co.", description: "Real paid media results: revenue, ROAS, bookings and leads from Google Ads, YouTube, Performance Max and Meta campaigns we have run.", url: "/case-studies" },
+  openGraph: { ...OG_DEFAULTS, title: "Case Studies | MindandMatrix Co.", description: "Real paid media results: revenue, ROAS, bookings and leads from Google Ads, YouTube, Performance Max and Meta campaigns we have run.", url: "/case-studies" },
 };
 
 export default async function CaseStudiesPage() {

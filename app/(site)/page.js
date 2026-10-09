@@ -5,18 +5,18 @@ import CaseStudyCard from "@/components/CaseStudyCard";
 import { safeListPublished } from "@/lib/caseStudies";
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
-import { DEFAULT_DESCRIPTION, jsonLdScript } from "@/lib/site";
+import { DEFAULT_DESCRIPTION, OG_DEFAULTS, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
-  title: { absolute: "White Label PPC & Advertising Agency | Mind and Matrix Co." },
+  title: { absolute: "White Label PPC & Advertising Agency | MindandMatrix Co." },
   description: DEFAULT_DESCRIPTION,
   alternates: { canonical: "/" },
-  openGraph: { title: "White Label PPC & Advertising Agency | Mind and Matrix Co.", description: DEFAULT_DESCRIPTION, url: "/" },
+  openGraph: { ...OG_DEFAULTS, title: "White Label PPC & Advertising Agency | MindandMatrix Co.", description: DEFAULT_DESCRIPTION, url: "/" },
 };
 
 const FAQS = [
-  ["What is Mind and Matrix Co.?", "Mind and Matrix Co. is a white label PPC and performance marketing agency based in Dhaka, Bangladesh. It runs Google Ads, Meta, Microsoft and LinkedIn ads, creatives, landing pages and conversion tracking for marketing agencies under their brand, and dental marketing for dental practices in the US, Canada and Australia."],
-  ["Who founded Mind and Matrix Co.?", "Mind and Matrix Co. was founded by Abdul Ahad Pavel, an AdTech, CRO and tracking specialist, and Partho Sharothi Paul, a media planning and buying lead who has run campaigns for brands like ASUS and Yamaha."],
+  ["What is MindandMatrix Co.?", "MindandMatrix Co. is a white label PPC and performance marketing agency based in Dhaka, Bangladesh. It runs Google Ads, Meta, Microsoft and LinkedIn ads, creatives, landing pages and conversion tracking for marketing agencies under their brand, and dental marketing for dental practices in the US, Canada and Australia."],
+  ["Who founded MindandMatrix Co.?", "MindandMatrix Co. was founded by Abdul Ahad Pavel, an AdTech, CRO and tracking specialist, and Partho Sharothi Paul, a media planning and buying lead who has run campaigns for brands like ASUS and Yamaha."],
   ["Will my clients ever find out you are involved?", "No. We work inside accounts under your agency’s access, use your branding on every report and sign an NDA. If you want us on a call, we join as members of your team."],
   ["How does pricing work?", "You pay us a wholesale fee per client account (or a monthly fee for a dedicated team). You set your own retail price and keep the difference. No long-term contracts."],
   ["Who owns the ad accounts?", "Your client (or your agency) always owns the ad accounts, pixels and data. We get partner access only and can be removed at any time."],
@@ -48,7 +48,7 @@ export default async function HomePage() {
               Your brand. <em>Our ad team.</em> Zero hiring.
             </h1>
             <p className="hero-lead">
-              Mind and Matrix Co. is the white-label paid media partner for marketing agencies. We run ads on
+              MindandMatrix Co. is the white-label paid media partner for marketing agencies. We run ads on
               Google, Meta, Microsoft, LinkedIn and other paid media channels, create the ad creatives, plan
               the content strategy, build landing pages, and set up the tracking, CRM and reporting behind
               them — for your clients, 100% under your name.
@@ -805,7 +805,7 @@ export default async function HomePage() {
               <thead>
                 <tr>
                   <th />
-                  <th>Mind and Matrix Co. (white label)</th>
+                  <th>MindandMatrix Co. (white label)</th>
                   <th>Hiring in-house</th>
                 </tr>
               </thead>
@@ -1017,10 +1017,10 @@ export default async function HomePage() {
       <section className="section">
         <div className="wrap home-about">
           <div className="reveal">
-            <span className="eyebrow">About Mind and Matrix Co.</span>
+            <span className="eyebrow">About MindandMatrix Co.</span>
             <h2>A digital advertising agency that works as your team</h2>
             <p>
-              Mind and Matrix Co. (also known as mindandmatrixco) is a white label digital advertising agency based in
+              MindandMatrix Co. (also known as mindandmatrixco) is a white label digital advertising agency based in
               Dhaka, Bangladesh. We plan and run Google Ads, Facebook and Instagram ads, YouTube and LinkedIn campaigns,
               create the ad creatives, build landing pages, and set up the conversion tracking and web analytics that
               prove what’s working.

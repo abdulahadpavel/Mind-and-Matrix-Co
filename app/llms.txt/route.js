@@ -19,7 +19,7 @@ export async function GET() {
 
 > ${DEFAULT_DESCRIPTION}
 
-${SITE_NAME} (also written Mind and Matrix, mindandmatrixco) is a performance marketing agency based in ${CITY}, ${COUNTRY}, founded by Abdul Ahad Pavel and Partho Sharothi Paul. It works in two ways:
+${SITE_NAME} (also written Mind and Matrix Co., Mind and Matrix or mindandmatrixco) is a performance marketing agency based in ${CITY}, ${COUNTRY}, founded by Abdul Ahad Pavel and Partho Sharothi Paul. It works in two ways:
 
 1. **White label partner for marketing agencies** — runs paid media (Google Ads, Meta, Microsoft, LinkedIn and TikTok ads), creatives, landing pages, conversion tracking and reporting for other agencies' clients, fully under the reselling agency's brand. NDA on request, wholesale pricing per client account or a dedicated team, month to month, no long-term contract. The client or agency always owns the ad accounts.
 2. **Dental marketing for dental practices** — Google Ads, Facebook and Instagram ads, Google Business Profile and YouTube for dental practices in the United States, Canada and Australia, with call and booking tracking and HIPAA-aware (privacy-safe) ad tracking.

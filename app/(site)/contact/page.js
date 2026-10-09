@@ -1,12 +1,13 @@
 import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
+import { OG_DEFAULTS } from "@/lib/site";
 
 export const metadata = {
   title: "Contact Us — Get a Free Proposal",
   description:
-    "Contact Mind and Matrix Co. at admin@mindandmatrixco.com or on WhatsApp +8801737054053. Get a free proposal for Google Ads, Facebook ads, conversion tracking or white label services.",
+    "Contact MindandMatrix Co. at admin@mindandmatrixco.com or on WhatsApp +8801737054053. Get a free proposal for Google Ads, Facebook ads, conversion tracking or white label services.",
   alternates: { canonical: "/contact" },
-  openGraph: { title: "Contact Us — Get a Free Proposal | Mind and Matrix Co.", description: "Contact Mind and Matrix Co. at admin@mindandmatrixco.com or on WhatsApp +8801737054053. Get a free proposal for Google Ads, Facebook ads, conversion tracking or white label services.", url: "/contact" },
+  openGraph: { ...OG_DEFAULTS, title: "Contact Us — Get a Free Proposal | MindandMatrix Co.", description: "Contact MindandMatrix Co. at admin@mindandmatrixco.com or on WhatsApp +8801737054053. Get a free proposal for Google Ads, Facebook ads, conversion tracking or white label services.", url: "/contact" },
 };
 
 export default function ContactPage() {

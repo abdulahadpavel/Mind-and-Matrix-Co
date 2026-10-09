@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import ServicePage from "@/components/ServicePage";
 import { DENTAL_PAGES } from "@/lib/dentalPages";
+import { OG_DEFAULTS } from "@/lib/site";
 
 // Only the slugs listed in lib/dentalPages.js exist; any other /dental/<path> is a 404.
 export const dynamicParams = false;
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }) {
     description: page.metaDescription,
     keywords: page.keywords,
     alternates: { canonical: `/dental/${page.slug}` },
-    openGraph: { title: page.metaTitle, description: page.metaDescription, url: `/dental/${page.slug}`, type: "website" },
+    openGraph: { ...OG_DEFAULTS, title: page.metaTitle, description: page.metaDescription, url: `/dental/${page.slug}`, type: "website" },
   };
 }
 

@@ -3,12 +3,12 @@ import LeadForm from "@/components/LeadForm";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import { LOCATIONS, LOCATION_LIST } from "@/lib/locations";
 import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
-import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
+import { OG_DEFAULTS, SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 export const metadata = {
-  title: { absolute: "Best White Label Advertising Agency | Mind and Matrix Co." },
+  title: { absolute: "Best White Label Advertising Agency | MindandMatrix Co." },
   description:
-    "Mind and Matrix Co. is a white label advertising agency for agencies in Canada, Australia, California, New York and Florida. Google Ads, Facebook & Instagram ads, Microsoft Ads and tracking — run under your brand.",
+    "MindandMatrix Co. is a white label advertising agency for agencies in Canada, Australia, California, New York and Florida. Google Ads, Facebook & Instagram ads, Microsoft Ads and tracking — run under your brand.",
   keywords: [
     "best white label advertising agency",
     "white label advertising agency",
@@ -25,7 +25,8 @@ export const metadata = {
   ],
   alternates: { canonical: "/white-label" },
   openGraph: {
-    title: "Best White Label Advertising Agency | Mind and Matrix Co.",
+    ...OG_DEFAULTS,
+    title: "Best White Label Advertising Agency | MindandMatrix Co.",
     description:
       "White label Google Ads, Facebook ads, Microsoft Ads and tracking for agencies in Canada, Australia, California, New York and Florida.",
     url: "/white-label",
@@ -120,7 +121,7 @@ export default function WhiteLabelPage() {
               The white label advertising agency that works <em>under your brand.</em>
             </h1>
             <p className="hero-lead">
-              Mind and Matrix Co. becomes your agency’s invisible ad department: strategy, campaign management,
+              MindandMatrix Co. becomes your agency’s invisible ad department: strategy, campaign management,
               creatives, landing pages, tracking and reporting, delivered with your logo and your name on every
               touchpoint.
             </p>

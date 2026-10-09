@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import ServicePage from "@/components/ServicePage";
 import { SERVICE_PAGES } from "@/lib/servicePages";
 import { WHITE_LABEL_PAGES } from "@/lib/whiteLabelPages";
+import { OG_DEFAULTS } from "@/lib/site";
 
 // Only the slugs listed in lib/servicePages.js and lib/whiteLabelPages.js exist; any other path is a 404.
 export const dynamicParams = false;
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }) {
     description: page.metaDescription,
     keywords: page.keywords,
     alternates: { canonical: `/${page.slug}` },
-    openGraph: { title: page.metaTitle, description: page.metaDescription, url: `/${page.slug}`, type: "website" },
+    openGraph: { ...OG_DEFAULTS, title: page.metaTitle, description: page.metaDescription, url: `/${page.slug}`, type: "website" },
   };
 }
 

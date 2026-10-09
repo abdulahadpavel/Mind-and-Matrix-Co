@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 // The preview image shown when the site is shared on Facebook, LinkedIn, WhatsApp, X…
-export const alt = "Mind and Matrix Co. — White Label Digital Advertising Agency";
+export const alt = "MindandMatrix Co. — White Label Digital Advertising Agency";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -25,7 +25,7 @@ export default function OpengraphImage() {
           <div style={{ width: 64, height: 64, borderRadius: 16, background: "linear-gradient(135deg,#2F6BFF,#12B886)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 38 }}>
             M
           </div>
-          Mind and Matrix Co.
+          MindandMatrix Co.
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>White Label Digital Advertising Agency</div>

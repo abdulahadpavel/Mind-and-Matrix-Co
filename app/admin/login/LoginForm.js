@@ -10,7 +10,7 @@ export default function LoginForm({ next }) {
   return (
     <main className="adm-login">
       <form className="adm-login-card" action={action}>
-        <img src="/img/logo-horizontal.svg" alt="Mind and Matrix Co." width="200" height="32" />
+        <img src="/img/logo-horizontal.svg" alt="MindandMatrix Co." width="200" height="32" />
         <h1>Admin sign in</h1>
         <p>Manage the leads sent from the website.</p>
         <input type="hidden" name="next" value={next} />

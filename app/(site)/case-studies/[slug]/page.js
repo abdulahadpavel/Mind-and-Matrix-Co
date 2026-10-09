@@ -5,7 +5,7 @@ import HeroBackdrop from "@/components/HeroBackdrop";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import Markdown from "@/components/Markdown";
 import { getPublishedBySlug, safeListPublished } from "@/lib/caseStudies";
-import { SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
+import { OG_DEFAULTS, SITE_NAME, SITE_URL, absoluteUrl, jsonLdScript } from "@/lib/site";
 
 // Published case studies are built ahead of time; new ones are built on first visit.
 // Saving in the admin clears these pages so changes show right away.
@@ -25,6 +25,7 @@ export async function generateMetadata({ params }) {
     description,
     alternates: { canonical: `/case-studies/${cs.slug}` },
     openGraph: {
+    ...OG_DEFAULTS,
       type: "article",
       title,
       description,
