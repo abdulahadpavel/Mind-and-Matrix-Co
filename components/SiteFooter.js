@@ -68,6 +68,12 @@ export default function SiteFooter() {
               <li>
                 <Link href="/#industries">D2C Ecommerce Brand</Link>
               </li>
+              <li>
+                <Link href="/#industries">B2B Companies</Link>
+              </li>
+              <li>
+                <Link href="/#industries">B2C Companies</Link>
+              </li>
             </ul>
           </div>
           <div>
