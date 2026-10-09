@@ -1,7 +1,22 @@
 import Link from "next/link";
-import { SERVICE_PAGES } from "@/lib/servicePages";
 import { CITY, COUNTRY, EMAIL, WHATSAPP, WHATSAPP_URL } from "@/lib/site";
 import { LOCATIONS } from "@/lib/locations";
+
+// Services without their own page link to the services overview.
+const SERVICES = [
+  { href: "/services", label: "PPC & Media Buying" },
+  { href: "/google-ads-agency", label: "Google Ads" },
+  { href: "/facebook-ads-agency", label: "Meta Ads" },
+  { href: "/services", label: "Microsoft Ads" },
+  { href: "/services", label: "LinkedIn Ads" },
+  { href: "/services", label: "TikTok Ads" },
+  { href: "/services", label: "ChatGPT Ads" },
+  { href: "/services", label: "Creatives & UGC" },
+  { href: "/services", label: "Landing Pages" },
+  { href: "/conversion-tracking", label: "Conversion Tracking" },
+  { href: "/services", label: "CRM & Automation" },
+  { href: "/web-analytics-agency", label: "Reporting & Analytics" },
+];
 
 export default function SiteFooter() {
   return (
@@ -79,12 +94,9 @@ export default function SiteFooter() {
           <div>
             <h2 className="footer-title">Services</h2>
             <ul>
-              <li>
-                <Link href="/white-label">White Label Agency</Link>
-              </li>
-              {SERVICE_PAGES.map((s) => (
-                <li key={s.slug}>
-                  <Link href={`/${s.slug}`}>{s.navLabel}</Link>
+              {SERVICES.map((s) => (
+                <li key={s.label}>
+                  <Link href={s.href}>{s.label}</Link>
                 </li>
               ))}
             </ul>
