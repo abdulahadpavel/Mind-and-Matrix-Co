@@ -3,11 +3,33 @@ import { createSubmission, FIELDS } from "@/lib/submissions";
 import { getSetting } from "@/lib/settings";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_BODY_BYTES = 20_000; // a filled-in form is ~2 KB
 
 export async function POST(request) {
+  // Only this site's own pages may post leads (a browser on another site always sends its Origin).
+  const origin = request.headers.get("origin");
+  const host = request.headers.get("x-forwarded-host") || request.headers.get("host");
+  if (origin) {
+    let originHost = "";
+    try {
+      originHost = new URL(origin).host;
+    } catch {}
+    if (!host || originHost !== host) {
+      return NextResponse.json({ success: false, error: "Request refused." }, { status: 403 });
+    }
+  }
+  if (!(request.headers.get("content-type") || "").startsWith("application/json")) {
+    return NextResponse.json({ success: false, error: "Invalid request." }, { status: 415 });
+  }
+
   let body;
   try {
-    body = await request.json();
+    const raw = await request.text();
+    if (raw.length > MAX_BODY_BYTES) {
+      return NextResponse.json({ success: false, error: "Request too large." }, { status: 413 });
+    }
+    body = JSON.parse(raw);
+    if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("not an object");
   } catch {
     return NextResponse.json({ success: false, error: "Invalid request." }, { status: 400 });
   }
